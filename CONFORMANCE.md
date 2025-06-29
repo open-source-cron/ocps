@@ -50,7 +50,7 @@ An implementation may not support all features of a specific OCPS version. The t
 
 | Library | OCPS 1.0 | OCPS 1.1 | OCPS 1.2 | OCPS 1.3 | OCPS 1.4 | Notes |
 | :--- | :---: | :---: | :---: | :---: | :---: | :--- |
-| **croner-rust** | ✅ | ✅ | ✅ | ✅ | ✅ | Full support for all specified features. |
+| **croner-rust** | ✅ | ✅ | ✅ | ✅ | 🟡 | Allows `?` in all fields. |
 | **cron** | ✅ | 🟡 | ❌ | ❌ | ❌ | Supports seconds but not nicknames or other extended features. |
 | **saffron** | 🟡 | ❌ | 🟡 | ✅ | 🟡 | Quartz-like. Does not support `OR` logic or seconds. Weekday numbering differs. |
 
