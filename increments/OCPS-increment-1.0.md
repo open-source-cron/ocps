@@ -1,11 +1,11 @@
-# OCPS 1.0: The Vixie Cron Baseline
+# OCPS 1.0: The Baseline
 
-**Status: DRAFT**
+**Revision: DRAFT**
 **Date: 2025-06-30**
 
 ## 1. Introduction
 
-This document defines version 1.0 of the Open Cron Pattern Specification (OCPS). This version serves as the foundational baseline for all future versions. Its primary goal is to codify the Vixie cron standard, ensuring a stable and universally understood foundation for scheduling.
+This document defines version 1.0 of the Open Cron Pattern Specification (OCPS). This version serves as the foundational baseline for all future versions. Its primary goal is to codify the established Vixie / ISC cron standard, ensuring a stable and universally understood foundation for scheduling.
 
 ## 2. Conformance
 

@@ -1,7 +1,7 @@
 # OCPS 1.4: Logical & Implementation Semantics
 
-**Status: DRAFT**
-**Date: 2025-06-29**
+**Revision: DRAFT**
+**Date: 2025-06-30**
 
 ## 1. Introduction
 

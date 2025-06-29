@@ -8,33 +8,50 @@ OCPS (Open Cron Pattern Specification) is an open standard for cron expressions 
 
 This repository contains the official versioned specifications for OCPS.
 
-## 2. The OCPS Principle: Incremental Introduction
+## 2. Background: The Evolution of Cron
 
-The core principle behind OCPS is **Incremental Introduction & Backward Compatibility**. OCPS is designed to be adopted in stages, ensuring that any pattern valid in a previous version remains valid and behaves identically in all subsequent versions.
+The `cron` utility has a long history with several evolutionary paths. Understanding this history is key to understanding why OCPS is structured the way it is.
 
-This approach provides a clear and stable evolution path:
+* **The Origin (AT&T Cron):** The original cron daemon was developed at Bell Labs and was part of AT&T's Unix. It was simple and effective but lacked many features now considered standard.
 
-* **OCPS 1.0:** The foundational baseline, offering 100% compatibility with the widely-used Vixie cron standard.
-* **OCPS 1.1 and beyond:** Each subsequent version introduces a new, self-contained feature set (like second-level precision or advanced calendar modifiers) without altering existing behavior.
+* **The Formal Standard (POSIX):** The POSIX standard later defined a formal specification for `cron`. However, this standard is very minimal. It mandates the basic five-field format but does not include widely used features like step values (`*/5`), ranges of values (`1-5`), or names for months and days of the week (`JAN`, `MON`). An implementation can be POSIX-compliant without being very user-friendly.
 
-This guarantees that implementers can adopt the level of complexity they need, and users can rely on consistent behavior across any OCPS-compliant tool.
+* **The De Facto Standard (Vixie/ISC Cron):** In 1987, Paul Vixie created a new implementation, `vixie-cron`, which added the user-friendly features missing from the POSIX standard. This version became immensely popular and is the default cron implementation on most Linux distributions and BSD systems. It later became known as ISC Cron. Because of its ubiquity, Vixie cron represents the syntax that most developers and system administrators know and expect.
 
-## 3. Specification Versions
+* **Other Paths (Quartz, etc.):** Other influential schedulers, notably Quartz from the Java ecosystem, also extended the cron format but made different design choices. For example, Quartz introduced powerful modifiers like `L`, `W`, and `#`, but also defaults to a logical `AND` when both day-of-month and day-of-week are specified—a significant departure from the Vixie/POSIX `OR` logic.
 
-The official specification documents are located in the `/versions` directory.
+### Why OCPS is based on Vixie Cron
 
-| Version | Status | Title | Summary | Link |
-| :--- | :--- | :--- | :--- | :--- |
-| **1.4** | DRAFT | Logical & Implementation Semantics | Adds configurable AND/OR logic and defines the `?` character. | [OCPS 1.4](./versions/OCPS-1.4.md) |
-| **1.3** | DRAFT | Context-Sensitive Modifiers | Adds the `W` (Closest Weekday) modifier. | [OCPS 1.3](./versions/OCPS-1.3.md) |
-| **1.2** | DRAFT | Advanced Calendar Scheduling | Adds the `L` (Last) and `#` (Nth) modifiers. | [OCPS 1.2](./versions/OCPS-1.2.md) |
-| **1.1** | DRAFT | High-Level Abstractions | Adds optional second-level precision and predefined nicknames (`@daily`, etc.). | [OCPS 1.1](./versions/OCPS-1.1.md) |
-| **1.0** | DRAFT | The Vixie Cron Baseline | The foundational standard, 100% compatible with Vixie cron. | [OCPS 1.0](./versions/OCPS-1.0.md) |
+OCPS chooses Vixie cron as its baseline (OCPS 1.0) because it represents the most common and widely understood cron syntax in the world. By starting with a 100% Vixie-compatible foundation, OCPS ensures that the vast majority of existing cron patterns work as expected, providing a stable and familiar base upon which to incrementally add new, powerful features from other implementations.
 
-## 4. Conformance
+## 3. The OCPS Principle: Incremental Introduction
 
-Each specification document contains a "Conformance" section detailing the requirements for an implementation to claim compliance with that specific version of OCPS.
+The core principle behind OCPS is **Incremental Introduction & Backward Compatibility**. OCPS is designed to be adopted in stages, ensuring that any pattern valid in a previous version remains valid and behaves identically in all subsequent versions. This guarantees that implementers can adopt the level of complexity they need, and users can rely on consistent behavior across any OCPS-compliant tool.
 
-## 5. Contributing
+## 4. Repository Layout
+
+This repository is structured to provide two views of the specification:
+
+* **/increments**: This directory contains documents describing only the *new features* introduced in each version. These are useful for quickly seeing what has changed. Works in progress for future versions are also located here and named according to their state until being finalized (e.g., `OCPS-increment-1.5.md`).
+
+* **/specifications**: This directory contains the *full, consolidated* specification for each version. These documents are the canonical reference for implementers. A new specification file is only published here once its corresponding increment has been finalized.
+
+## 5. Increments and Full Specifications
+
+The official specification documents are linked below.
+
+| Version | Status | Title | Incremental Change | Full Specification |
+| :--- | :---: | :--- | :--- | :--- |
+| **1.4** | DRAFT | Logical & Implementation Semantics | [1.4 Increment](./increments/OCPS-increment-1.4.md) | N/A |
+| **1.3** | DRAFT | Advanced Calendar Scheduling | [1.3 Increment](./increments/OCPS-increment-1.3.md) | N/A |
+| **1.2** | DRAFT | Second-Level Precision | [1.2 Increment](./increments/OCPS-increment-1.2.md) | N/A |
+| **1.1** | DRAFT | Pre-defined Schedules | [1.1 Increment](./increments/OCPS-increment-1.1.md) | N/A |
+| **1.0** | DRAFT | The Baseline | [1.0 Increment](./increments/OCPS-increment-1.0.md) | N/A |
+
+## 6. Conformance
+
+Each increment and full specification document contains a "Conformance" section detailing the requirements for an implementation to claim compliance with that specific version of OCPS.
+
+## 7. Contributing
 
 This project is in its draft stages. Contributions, suggestions, and feedback are welcome. Please open an issue to start a discussion.
