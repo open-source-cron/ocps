@@ -26,8 +26,7 @@ An implementation may not support all features of a specific OCPS version. The t
 
 | Daemon | OCPS 1.0 | OCPS 1.1 | OCPS 1.2 | OCPS 1.3 | OCPS 1.4 | Notes |
 | :--- | :---: | :---: | :---: | :---: | :---: | :--- |
-| **cronie** | ✅ | ✅ | 🟡 | ❌ | ❌ | A fork of Vixie-cron. Supports nicknames and seconds. [3, 4] |
-
+| **cronie** | ✅ | ✅ | ✅ | ❌ | ❌ | A fork of Vixie-cron. Supports nicknames and seconds. [3, 4] |
 | **vixie-cron** / **isc-cron** | ✅ | ✅ | ❌ | ❌ | ❌ | The de facto standard for system cron. [2, 1, 5] |
 | **dcron** | ✅ | ✅ | ❌ | ❌ | ❌ | A simple and lightweight implementation that supports nicknames. [6] |
 
