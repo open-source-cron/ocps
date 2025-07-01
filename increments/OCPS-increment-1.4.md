@@ -1,6 +1,6 @@
 # OCPS 1.4: Logical & Implementation Semantics
 
-**Revision: DRAFT**
+**Status: DRAFT**
 **Date: 2025-06-30**
 
 ## 1. Introduction
@@ -22,6 +22,8 @@ To resolve a common ambiguity in cron implementations, OCPS 1.4 formalizes the l
 * **Default Behavior (OR):** As defined in OCPS 1.0, the default logic is `OR`.
 
 * **Optional `AND` Mode:** An OCPS 1.4 compliant implementation MUST provide an optional mode to combine these fields with a logical `AND`. When this mode is enabled, a pattern will only match if **both** the `Day of Month` and `Day of Week` conditions are met.
+
+* **Implementation Guidance:** To ensure practical usability, it is RECOMMENDED that this mode can be configured by the end-user at runtime.
 
 * **Example (`0 12 1 * MON`):**
 

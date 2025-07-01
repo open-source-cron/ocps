@@ -1,7 +1,7 @@
 # OCPS 1.0: The Baseline
 
-**Revision: DRAFT**
-**Date: 2025-06-30**
+**Status: DRAFT**
+**Date: 2025-07-01**
 
 ## 1. Introduction
 
@@ -14,31 +14,42 @@ An implementation is considered "OCPS 1.0 Compliant" if it correctly parses and 
 ## 3. Pattern Format
 
 ### 3.1. Structure
-An OCPS 1.0 pattern MUST consist of five space-separated fields.
+An OCPS 1.0 pattern MUST consist of five fields separated by whitespace. A compliant parser MUST adhere to the following rules:
+* It MUST reject a pattern containing any characters not explicitly allowed by Section 3.3 by raising a clear parsing error.
+* Any leading or trailing whitespace from the entire string MUST be ignored.
+* One or more consecutive whitespace characters MUST be treated as a single delimiter.
 
 `MINUTE HOUR DAY-OF-MONTH MONTH DAY-OF-WEEK`
 
 ### 3.2. Field Values
 
-| Field | Required | Allowed Values |
-| :--- | :--- | :--- |
-| **Minute** | Yes | 0-59 |
-| **Hour** | Yes | 0-23 |
-| **Day of Month** | Yes | 1-31 |
-| **Month** | Yes | 1-12 or JAN-DEC |
-| **Day of Week**| Yes | 0-7 or SUN-SAT |
+| Field          | Required | Allowed Values  |
+| :------------- | :------- | :-------------- |
+| **Minute** | Yes      | 0-59            |
+| **Hour** | Yes      | 0-23            |
+| **Day of Month** | Yes      | 1-31            |
+| **Month** | Yes      | 1-12 or JAN-DEC |
+| **Day of Week** | Yes      | 0-7 or SUN-SAT  |
 
 * Month and Day of Week names MUST be treated as case-insensitive.
 * In the Day of Week field, `0` and `7` MUST both be treated as Sunday.
 
+### 3.3. Character Set
+
+After converting any textual representations (e.g., `JAN`, `SUN`) to their numeric equivalents, a pattern MUST only contain characters from the following set:
+
+* **Whitespace:** Space (`U+0020`) or horizontal tab (`U+0009`).
+* **Digits:** `0123456789`
+* **Special Characters:** `*,-/`
+
 ## 4. Special Characters
 
-| Character | Name | Example | Description |
-| :--- | :--- | :--- | :--- |
-| `*` | Wildcard | `* * * * *` | Matches every allowed value for the field. |
-| `,` | List Separator | `0,15,30,45` | Specifies a list of individual values. |
-| `-` | Range | `9-17` | Specifies an inclusive range of values. |
-| `/` | Step | `*/10` | Specifies an interval. `0-30/10` is equivalent to `0,10,20,30`. |
+| Character | Name           | Example      | Description                                                    |
+| :-------- | :------------- | :----------- | :------------------------------------------------------------- |
+| `*`       | Wildcard       | `* * * * *`  | Matches every allowed value for the field.                     |
+| `,`       | List Separator | `0,15,30,45` | Specifies a list of individual values.                         |
+| `-`       | Range          | `9-17`       | Specifies an inclusive range of values.                        |
+| `/`       | Step           | `*/10`       | Specifies an interval. `0-30/10` is equivalent to `0,10,20,30`. |
 
 ### 4.1. Combining Special Characters
 
@@ -54,3 +65,19 @@ In OCPS 1.0, the special characters are combined within a single field to create
 When both the `Day of Month` and `Day of Week` fields are restricted (i.e., not `*`), a match occurs if **either** field matches the current date. This is a logical `OR`.
 
 * **Example:** The pattern `0 12 1 * MON` will trigger at noon on the first day of every month, AND at noon on every Monday.
+
+### 5.2. Error Handling and Edge Cases
+
+#### Out-of-Range Values
+A parser MUST reject a pattern if any numeric value falls outside the allowed range for its field (e.g., `60` in the minute field, `32` in the day-of-month field). This MUST be treated as a parsing error.
+
+#### Impossible Date Combinations
+A pattern containing a valid but impossible date (e.g., `* * 31 2 *` for February 31st) MUST be considered syntactically valid and MUST NOT cause a parsing error.
+
+Implementations that provide iterators to find the next or previous occurrences of a schedule (e.g., `findNextRun()`) SHOULD throw a runtime error or otherwise indicate that no valid run time can ever be found for such a pattern.
+
+### 5.3. Implementation-Specific Configurations
+To allow for flexibility while maintaining a stable standard, the following rules apply to implementation-specific configurations:
+
+* An implementation MAY provide configuration options that alter the default behaviors defined in this specification.
+* Compliance with this specification MUST be evaluated based on the implementation's default, unconfigured behavior.

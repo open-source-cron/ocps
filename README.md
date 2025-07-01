@@ -4,7 +4,7 @@
 
 ## 1. Abstract
 
-OCPS (Open Cron Pattern Specification) is an open standard that aims to resolve the long-standing fragmentation and ambiguity in cron expression syntax. It defines a well-defined, backward-compatible superset of the Vixie-cron format. The goal of OCPS is to provide a reliable, feature-rich, and incrementally adoptable standard that allows developers to write portable and predictable schedules across any compliant tool.
+OCPS (Open Cron Pattern Specification) is an open specification that aims to resolve the long-standing fragmentation and ambiguity in cron expression syntax. It defines a well-defined, backward-compatible superset of the Vixie-cron format. The goal of OCPS is to provide a reliable, feature-rich, and incrementally adoptable standard that allows developers to write portable and predictable schedules across any compliant tool.
 
 This repository contains the official versioned specifications for OCPS.
 

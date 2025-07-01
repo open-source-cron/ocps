@@ -1,6 +1,6 @@
 # OCPS 1.3: Advanced Calendar Scheduling
 
-**Revision: DRAFT**
+**Status: DRAFT**
 **Date: 2025-06-30**
 
 ## 1. Introduction
