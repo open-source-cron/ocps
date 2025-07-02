@@ -17,7 +17,7 @@ An implementation may not support all features of a specific OCPS version. The t
 
 ### Adoption Summary
 
-This table shows the percentage of the {{LIBRARY_COUNT}} libraries listed below that are at least partially compliant with each OCPS version.
+This table shows the percentage of the {{LIBRARY_COUNT}} libraries listed below that meet different levels of conformance.
 
 {{ADOPTION_SUMMARY}}
 {{TABLES}}
@@ -144,21 +144,63 @@ function generateLegend(legendData: { [key: string]: LegendEntry }): string {
 
 function generateAdoptionSummary(versions: string[], libraries: Item[]): string {
     const totalLibs = libraries.length;
-    const adoptionRates: { [version: string]: string } = {};
 
-    for (const version of versions) {
-        const compliantCount = libraries.filter(lib => 
-            lib.compliance[version] === 'full' || lib.compliance[version] === 'partial'
-        ).length;
-        const percentage = totalLibs > 0 ? Math.round((compliantCount / totalLibs) * 100) : 0;
-        adoptionRates[version] = `${percentage}%`;
+    const fullFeatureAdoption = { name: 'Full Feature Adoption', rates: {} as { [v: string]: string } };
+    const anyFeatureAdoption = { name: 'Any Feature Adoption', rates: {} as { [v: string]: string } };
+    const anyConformance = { name: 'Any Conformance (Cumulative)', rates: {} as { [v: string]: string } };
+    const fullConformance = { name: 'Full Conformance (Cumulative)', rates: {} as { [v: string]: string } };
+
+    for (const [i, version] of versions.entries()) {
+        let fullFeatureCount = 0;
+        let anyFeatureCount = 0;
+        let anyCount = 0;
+        let fullCount = 0;
+
+        for (const lib of libraries) {
+            // Feature Adoption: Does it support this version's specific features?
+            if (lib.compliance[version] === 'full') {
+                fullFeatureCount++;
+            }
+            if (lib.compliance[version] === 'full' || lib.compliance[version] === 'partial') {
+                anyFeatureCount++;
+            }
+
+            // Cumulative Conformance Check
+            let isFullyCompliantSoFar = true;
+            for (let j = 0; j < i; j++) { // Check all previous versions
+                if (lib.compliance[versions[j]] !== 'full') {
+                    isFullyCompliantSoFar = false;
+                    break;
+                }
+            }
+
+            if (isFullyCompliantSoFar) {
+                // Any Conformance: Is it fully compliant up to now, AND at least partially compliant with this version?
+                if (lib.compliance[version] === 'full' || lib.compliance[version] === 'partial') {
+                    anyCount++;
+                }
+                // Full Conformance: Is it fully compliant up to now, AND fully compliant with this version?
+                if (lib.compliance[version] === 'full') {
+                    fullCount++;
+                }
+            }
+        }
+        
+        fullFeatureAdoption.rates[version] = `${totalLibs > 0 ? Math.round((fullFeatureCount / totalLibs) * 100) : 0}%`;
+        anyFeatureAdoption.rates[version] = `${totalLibs > 0 ? Math.round((anyFeatureCount / totalLibs) * 100) : 0}%`;
+        anyConformance.rates[version] = `${totalLibs > 0 ? Math.round((anyCount / totalLibs) * 100) : 0}%`;
+        fullConformance.rates[version] = `${totalLibs > 0 ? Math.round((fullCount / totalLibs) * 100) : 0}%`;
     }
     
-    const headers = versions.map(v => `**OCPS ${v}**`).join(' | ');
-    const separators = versions.map(() => ':---:').join(' | ');
-    const values = versions.map(v => `**${adoptionRates[v]}**`).join(' | ');
+    const headers = `| **Conformance Level** | ${versions.map(v => `**OCPS ${v}**`).join(' | ')} |`;
+    const separators = `| :--- | ${versions.map(() => ':---:').join(' | ')} |`;
+    
+    const row1 = `| ${anyFeatureAdoption.name} | ${versions.map(v => `**${anyFeatureAdoption.rates[v]}**`).join(' | ')} |`;
+    const row2 = `| ${fullFeatureAdoption.name} | ${versions.map(v => `**${fullFeatureAdoption.rates[v]}**`).join(' | ')} |`;
+    const row3 = `| ${anyConformance.name} | ${versions.map(v => `**${anyConformance.rates[v]}**`).join(' | ')} |`;
+    const row4 = `| ${fullConformance.name} | ${versions.map(v => `**${fullConformance.rates[v]}**`).join(' | ')} |`;
 
-    return `| ${headers} |\n| ${separators} |\n| ${values} |\n`;
+    return `${headers}\n${separators}\n${row1}\n${row2}\n${row3}\n${row4}\n`;
 }
 
 function generateCategoryTable(category: Category, versions: string[], legend: { [key: string]: LegendEntry }): string {

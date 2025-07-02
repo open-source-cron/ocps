@@ -19,11 +19,14 @@ An implementation may not support all features of a specific OCPS version. The t
 
 ### Adoption Summary
 
-This table shows the percentage of the 17 libraries listed below that are at least partially compliant with each OCPS version.
+This table shows the percentage of the 17 libraries listed below that meet different levels of conformance.
 
-| **OCPS 1.0** | **OCPS 1.1** | **OCPS 1.2** | **OCPS 1.3** | **OCPS 1.4** |
-| :---: | :---: | :---: | :---: | :---: |
-| **100%** | **41%** | **82%** | **53%** | **47%** |
+| **Conformance Level** | **OCPS 1.0** | **OCPS 1.1** | **OCPS 1.2** | **OCPS 1.3** | **OCPS 1.4** |
+| :--- | :---: | :---: | :---: | :---: | :---: |
+| Any Feature Adoption | **100%** | **41%** | **82%** | **53%** | **47%** |
+| Full Feature Adoption | **65%** | **41%** | **76%** | **47%** | **6%** |
+| Any Conformance (Cumulative) | **100%** | **35%** | **24%** | **12%** | **6%** |
+| Full Conformance (Cumulative) | **65%** | **35%** | **24%** | **6%** | **0%** |
 
 ### Specifications
 
