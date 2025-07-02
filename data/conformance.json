@@ -1,0 +1,105 @@
+{
+  "legend": {
+    "full": { "symbol": "✅", "name": "Full", "description": "Fully supports all features of this OCPS version." },
+    "partial": { "symbol": "🟡", "name": "Partial", "description": "Supports some, but not all, features of this version. See Notes." },
+    "none": { "symbol": "❌", "name": "None", "description": "Does not support the key features of this version." },
+    "na": { "symbol": "N/A", "name": "N/A", "description": "Not Applicable, as the system uses a fundamentally different syntax." }
+  },
+  "categories": [
+    {
+      "name": "Specifications",
+      "items": [
+        { "name": "POSIX `cron`", "compliance": { "1.0": "partial", "1.1": "none", "1.2": "none", "1.3": "none", "1.4": "none" }, "notes": "The official standard. Does not support steps (`/`) or month/day names.", "references": [1] }
+      ]
+    },
+    {
+      "name": "System Cron Daemons",
+      "items": [
+        { "name": "cronie", "compliance": { "1.0": "full", "1.1": "full", "1.2": "full", "1.3": "none", "1.4": "none" }, "notes": "A fork of Vixie-cron. Supports nicknames and seconds.", "references": [3, 4] },
+        { "name": "vixie-cron / isc-cron", "compliance": { "1.0": "full", "1.1": "full", "1.2": "none", "1.3": "none", "1.4": "none" }, "notes": "The de facto standard for system cron.", "references": [1, 2, 5] },
+        { "name": "dcron", "compliance": { "1.0": "full", "1.1": "full", "1.2": "none", "1.3": "none", "1.4": "none" }, "notes": "A simple and lightweight implementation that supports nicknames.", "references": [6] }
+      ]
+    },
+    {
+      "name": "Java Libraries",
+      "items": [
+        { "name": "Spring Framework (`@Scheduled`)", "compliance": { "1.0": "partial", "1.1": "none", "1.2": "full", "1.3": "full", "1.4": "partial" }, "notes": "Supports seconds, `L`, `W`, `#`. Uses `AND` logic for date fields. `?` is a wildcard. No nicknames.", "references": [7] },
+        { "name": "Quartz", "compliance": { "1.0": "partial", "1.1": "none", "1.2": "full", "1.3": "full", "1.4": "partial" }, "notes": "Original source for `L`, `W`, `#`. Does not allow combining dom ad dow, and but requires `?` to disambiguate date fields. No nicknames.", "references": [8, 9] }
+      ]
+    },
+    {
+      "name": ".NET Libraries",
+      "items": [
+        { "name": "Cronos", "compliance": { "1.0": "partial", "1.1": "full", "1.2": "full", "1.3": "full", "1.4": "partial" }, "notes": "Supports seconds, nicknames, and advanced characters. Uses `AND` logic for date fields.", "references": [11] },
+        { "name": "Coravel", "compliance": { "1.0": "full", "1.1": "none", "1.2": "none", "1.3": "none", "1.4": "none" }, "notes": "Provides basic cron string support but encourages a fluent API." }
+      ]
+    },
+    {
+      "name": "Rust Libraries",
+      "items": [
+        { "name": "croner-rust", "compliance": { "1.0": "full", "1.1": "full", "1.2": "full", "1.3": "full", "1.4": "partial" }, "notes": "Allows `?` as an alias for `*`.", "references": [12] },
+        { "name": "cron", "compliance": { "1.0": "partial", "1.1": "none", "1.2": "full", "1.3": "none", "1.4": "none" }, "notes": "Weekday numbering differs. Supports seconds but not nicknames or other extended features.", "references": [13, 14] },
+        { "name": "saffron", "compliance": { "1.0": "partial", "1.1": "none", "1.2": "partial", "1.3": "full", "1.4": "partial" }, "notes": "Quartz-like, uses `AND` logic for date fields. Does not support seconds. Weekday numbering differs.", "references": [15, 16] }
+      ]
+    },
+    {
+      "name": "Go Libraries",
+      "items": [
+        { "name": "gocron (`robfig/cron`)", "compliance": { "1.0": "full", "1.1": "full", "1.2": "full", "1.3": "none", "1.4": "partial" }, "notes": "Supports seconds & nicknames. `?` is alias for `*`. No `L`, `W`, `#`.", "references": [17] },
+        { "name": "go-quartz", "compliance": { "1.0": "partial", "1.1": "none", "1.2": "full", "1.3": "full", "1.4": "none" }, "notes": "Requiring `?` to disambiguate date fields. No nicknames.", "references": [18] }
+      ]
+    },
+    {
+      "name": "JavaScript / TypeScript Libraries",
+      "items": [
+        { "name": "croner (JS/TS)", "compliance": { "1.0": "full", "1.1": "full", "1.2": "full", "1.3": "partial", "1.4": "full" }, "notes": "Defaults to OCPS `OR` logic. `W` is not supported. `?` is for substitution. Provides an optional `AND` mode.", "references": [19] },
+        { "name": "node-schedule", "compliance": { "1.0": "full", "1.1": "none", "1.2": "full", "1.3": "none", "1.4": "none" }, "notes": "Supports seconds but not nicknames or other extended syntax." },
+        { "name": "node-cron", "compliance": { "1.0": "full", "1.1": "none", "1.2": "full", "1.3": "none", "1.4": "none" }, "notes": "Supports seconds." },
+        { "name": "cron (npm)", "compliance": { "1.0": "full", "1.1": "none", "1.2": "full", "1.3": "none", "1.4": "none" }, "notes": "Supports seconds.", "references": [20, 21] },
+        { "name": "cron-parser", "compliance": { "1.0": "full", "1.1": "none", "1.2": "full", "1.3": "full", "1.4": "partial" }, "notes": "Supports seconds, `L`, `#`. `?` is alias for `*`. No `W` or nicknames.", "references": [22] }
+      ]
+    },
+    {
+      "name": "PHP Libraries",
+      "items": [
+        { "name": "dragonmantank/cron-expression", "compliance": { "1.0": "full", "1.1": "full", "1.2": "none", "1.3": "full", "1.4": "none" }, "notes": "A popular foundational library. Supports `L`, `W`, `#`, and nicknames. Does not support seconds." }
+      ]
+    },
+    {
+      "name": "Python Libraries",
+      "items": [
+        { "name": "python-crontab", "compliance": { "1.0": "full", "1.1": "full", "1.2": "none", "1.3": "none", "1.4": "none" }, "notes": "Designed to manage system crontabs. Supports nicknames. No advanced characters." }
+      ]
+    },
+    {
+      "name": "Ruby Libraries",
+      "items": [
+        { "name": "Sidekiq-Cron", "compliance": { "1.0": "full", "1.1": "full", "1.2": "full", "1.3": "none", "1.4": "none" }, "notes": "Supports seconds and natural language parsing via the Fugit gem. No support for `L`, `W`, `#`." }
+      ]
+    }
+  ],
+  "references": [
+    { "id": 1, "url": "https://en.wikipedia.org/wiki/Cron" },
+    { "id": 2, "url": "https://github.com/vixie/cron" },
+    { "id": 3, "url": "https://wiki.gentoo.org/wiki/Cron" },
+    { "id": 4, "url": "https://manpages.ubuntu.com/manpages/jammy/man8/cron.8.html" },
+    { "id": 5, "url": "https://medium.com/bumble-tech/cron-in-linux-history-use-and-structure-70d938569b40" },
+    { "id": 6, "url": "https://www.jimpryor.net/linux/dcron.html" },
+    { "id": 7, "url": "https://productresources.collibra.com/docs/collibra/latest/Content/Cron/co_spring-cron.htm" },
+    { "id": 8, "url": "https://www.quartz-scheduler.org/documentation/quartz-2.3.0/tutorials/crontrigger.html" },
+    { "id": 9, "url": "https://docs.oracle.com/cd/E12058_01/doc/doc.1014/e12030/cron_expressions.htm" },
+    { "id": 10, "url": "https://indexoutofrange.com/Don't-do-it-now!-Part-6.-Hangfire-recurring-jobs/" },
+    { "id": 11, "url": "https://github.com/HangfireIO/Cronos" },
+    { "id": 12, "url": "https://crates.io/crates/croner/1.0.2" },
+    { "id": 13, "url": "https://docs.rs/cron" },
+    { "id": 14, "url": "https://www.twilio.com/en-us/blog/developers/community/run-cron-jobs-rust" },
+    { "id": 15, "url": "https://github.com/cloudflare/saffron" },
+    { "id": 16, "url": "https://news.ycombinator.com/item?id=41654723" },
+    { "id": 17, "url": "https://www.scalent.io/golang/golang-cron-job-example/" },
+    { "id": 18, "url": "https://github.com/reugn/go-quartz" },
+    { "id": 19, "url": "https://www.npmjs.com/package/croner" },
+    { "id": 20, "url": "https://www.npmjs.com/package/cron" },
+    { "id": 21, "url": "https://npm-compare.com/cron,node-cron,node-schedule" },
+    { "id": 22, "url": "https://www.npmjs.com/package/cron-parser" }
+  ]
+}

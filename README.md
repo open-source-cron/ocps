@@ -57,3 +57,11 @@ For a list of known libraries and their current conformance levels, please see t
 ## 7. Contributing
 
 This project is in its draft stages. Contributions, suggestions, and feedback are welcome. Please open an issue to start a discussion.
+
+### Updating the Conformance Matrix
+The Implementation Conformance Matrix is automatically generated from the `data/conformance.json` file. To propose changes, please edit `data/conformance.json` and submit a pull request.
+
+If you wish to regenerate the `CONFORMANCE.md` file locally to preview your changes, you can run the generation script. This requires Deno to be installed.
+
+**From the root of the repository:**
+`cd scripts && deno run -A generate-conformance-report.ts`
