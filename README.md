@@ -18,15 +18,15 @@ The `cron` utility has a long history with several evolutionary paths. Understan
 
 * **The De Facto Standard (Vixie/ISC Cron):** In 1987, Paul Vixie created a new implementation, `vixie-cron`, which added the user-friendly features missing from the POSIX standard. This version became immensely popular and is the default cron implementation on most Linux distributions and BSD systems. It later became known as ISC Cron. Because of its ubiquity, Vixie cron represents the syntax that most developers and system administrators know and expect.
 
-* **Other Paths (Quartz, etc.):** Other influential schedulers, notably Quartz from the Java ecosystem, also extended the cron format but made different fundamental design choices. While Quartz introduced powerful modifiers like `L`, `W`, and `#`, its most significant departure from the Vixie/POSIX model is how it handles the day-of-month and day-of-week fields. Instead of the traditional `OR` logic, Quartz uses a logical `AND`. This requires using a `?` character in one field to explicitly ignore it when the other is specified.
+* **Divergent Implementations (e.g., Quartz)**: Schedulers like Quartz, originating in the Java ecosystem, introduced significant variations to the cron format. In addition to new modifiers like `L`, `W`, and `#`, Quartz altered core behaviors. It enforces a logical `AND` between the day-of-month and day-of-week fields, which requires using a `?` character to deactivate one field. Furthermore, it uses a `1-7` numbering for days of the week (Sunday=1), diverging from the Vixie cron standard where Sunday is `0` or `7`. This design choice, rooted in Java's Calendar class, has propagated to other libraries, even outside of Java, further fragmenting the cron syntax landscape.
 
 ### Why OCPS is based on Vixie Cron
 
-OCPS chooses Vixie cron as its baseline (OCPS 1.0) because it represents the most common and widely understood cron syntax in the world. By starting with a 100% Vixie-compatible foundation, OCPS ensures that the vast majority of existing cron patterns work as expected, providing a stable and familiar base upon which to incrementally add new, powerful features from other implementations.
+OCPS chooses Vixie cron as its baseline (OCPS 1.0) because it represents the most common and widely understood cron syntax, which builds upon the minimal POSIX standard with essential, user-friendly features. By starting with a 100% Vixie-compatible foundation, OCPS ensures that the vast majority of existing cron patterns work as expected, providing a stable and familiar base upon which to incrementally add new, powerful features from other implementations.
 
 ## 3. The OCPS Principles
 
-The core principles behind OCPS is **Incremental Introduction** and **Backward Compatibility**. OCPS is designed to be adopted in stages, ensuring that any pattern valid in a previous version remains valid and behaves identically in all subsequent versions. This guarantees that implementers can adopt the level of complexity they need, and users can rely on consistent behavior across any OCPS-compliant tool.
+The core principles behind OCPS are **Incremental Introduction** and **Backward Compatibility**. OCPS is designed to be adopted in stages, ensuring that any pattern valid in a previous version remains valid and behaves identically in all subsequent versions. This guarantees that implementers can adopt the level of complexity they need, and users can rely on consistent behavior across any OCPS-compliant tool.
 
 ## 4. Repository Layout
 
