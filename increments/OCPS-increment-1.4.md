@@ -11,24 +11,30 @@ This version does not introduce new scheduling capabilities but instead focuses 
 
 -----
 
-## 2\. Conformance
+## 2\. Design Rationale
+
+The focus of OCPS 1.4 is to increase reliability by resolving critical ambiguities between major cron dialects. The most significant divergence is the `AND`/`OR` logic for date fields; this version introduces the `!` modifier as a portable, explicit solution. This inncrement also provides guidance for handling the non-portable `?` character and Daylight Saving Time transitions to further unify behavior across all compliant schedulers.
+
+-----
+
+## 3\. Conformance
 
 An implementation is "OCPS 1.4 Compliant" if it meets all OCPS 1.3 requirements and correctly implements the logical modes and character definitions herein.
 
 -----
 
-## 3\. New Features in OCPS 1.4
+## 4\. New Features in OCPS 1.4
 
-### 3.1. Logical Combination of Date Fields
+### 4.1. Logical Combination of Date Fields
 
 To resolve a common ambiguity in cron implementations, OCPS 1.4 formalizes the logical combination of `Day of Month` and `Day of Week`.
 
-#### 3.1.1. Default Behavior and Optional `AND` Mode
+#### 4.1.1. Default Behavior and Optional `AND` Mode
 
   * **Default Behavior (OR):** As defined in OCPS 1.0, the default logic is `OR`.
   * **Optional `AND` Mode:** An OCPS 1.4 compliant implementation MAY provide an optional, non-portable mode to combine these fields with a logical `AND`. When this mode is enabled, a pattern will only match if **both** the `Day of Month` and `Day of Week` conditions are met.
 
-#### 3.1.2. Pattern-Specific `AND` Modifier (`!`)
+#### 4.1.2. Pattern-Specific `AND` Modifier (`!`)
 
 To provide a portable method for enabling `AND` logic, OCPS 1.4 introduces the `!` modifier.
 
@@ -40,7 +46,7 @@ To provide a portable method for enabling `AND` logic, OCPS 1.4 introduces the `
       * **Default (OR) `0 12 1 * MON`:** Triggers at noon on the 1st of the month AND at noon on every Monday.
       * **With `!` Modifier `0 12 1 * !MON`:** Triggers at noon ONLY if the 1st of the month is a Monday.
 
-### 3.2. `?` Character Definition
+### 4.2. `?` Character Definition
 
 The `?` character has historically had different meanings in different cron libraries (e.g., Quartz vs. Vixie cron). OCPS 1.4 addresses this ambiguity.
 
@@ -50,9 +56,9 @@ The `?` character has historically had different meanings in different cron libr
       * The `?` character is only meaningful in the `Day of Month` and `Day of Week` fields. Its use in any other field MUST be treated as a parsing error.
       * An implementation MUST NOT assign any other meaning to `?`.
 
-### 3.3. Guidance on Implementation Semantics
+### 4.3. Guidance on Implementation Semantics
 
-#### 3.3.1. Daylight Saving Time (DST) Transitions
+#### 4.3.1. Daylight Saving Time (DST) Transitions
 
 For any scheduler implementation, whether it enumerates future run times or polls the current time, handling DST transitions consistently is critical. To align with the time-tested behavior of Vixie cron, the following handling is RECOMMENDED:
 
