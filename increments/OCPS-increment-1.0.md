@@ -81,3 +81,9 @@ To allow for flexibility while maintaining a stable standard, the following rule
 
 * An implementation MAY provide configuration options that alter the default behaviors defined in this specification.
 * Compliance with this specification MUST be evaluated based on the implementation's default, unconfigured behavior.
+
+### 5.4. Time Zone Handling
+
+OCPS 1.0 patterns are **timezone-agnostic**.
+
+A compliant parser or scheduler MUST interpret the pattern against the implementation's local time. The mechanism for defining this local time is an implementation detail, as per Section 5.3.
