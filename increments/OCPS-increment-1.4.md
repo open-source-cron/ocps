@@ -1,46 +1,60 @@
 # OCPS 1.4: Logical & Implementation Semantics
 
 **Status: DRAFT**
-**Date: 2025-06-30**
+**Date: 2025-07-03**
 
-## 1. Introduction
+## 1\. Introduction
 
-This document defines version 1.4 of the Open Cron Pattern Specification (OCPS). It is a backward-compatible superset of [OCPS 1.3](./1.3.md).
+This document defines version 1.4 of the Open Cron Pattern Specification (OCPS). It is a backward-compatible superset of [OCPS 1.3](https://www.google.com/search?q=./1.3.md).
 
 This version does not introduce new scheduling capabilities but instead focuses on standardizing evaluation logic and clarifying implementation-specific ambiguities.
 
-## 2. Conformance
+-----
 
-An implementation is "OCPS 1.4 Compliant" if it meets all OCPS 1.3 requirements and correctly implements the logical mode and character definitions herein.
+## 2\. Conformance
 
-## 3. New Features in OCPS 1.4
+An implementation is "OCPS 1.4 Compliant" if it meets all OCPS 1.3 requirements and correctly implements the logical modes and character definitions herein.
 
-### 3.1. Optional `AND` Logic for Date Fields
+-----
+
+## 3\. New Features in OCPS 1.4
+
+### 3.1. Logical Combination of Date Fields
 
 To resolve a common ambiguity in cron implementations, OCPS 1.4 formalizes the logical combination of `Day of Month` and `Day of Week`.
 
-* **Default Behavior (OR):** As defined in OCPS 1.0, the default logic is `OR`.
+#### 3.1.1. Default Behavior and Optional `AND` Mode
 
-* **Optional `AND` Mode:** An OCPS 1.4 compliant implementation MUST provide an optional mode to combine these fields with a logical `AND`. When this mode is enabled, a pattern will only match if **both** the `Day of Month` and `Day of Week` conditions are met.
+  * **Default Behavior (OR):** As defined in OCPS 1.0, the default logic is `OR`.
+  * **Optional `AND` Mode:** An OCPS 1.4 compliant implementation MAY provide an optional, non-portable mode to combine these fields with a logical `AND`. When this mode is enabled, a pattern will only match if **both** the `Day of Month` and `Day of Week` conditions are met.
 
-* **Implementation Guidance:** To ensure practical usability, it is RECOMMENDED that this mode can be configured by the end-user at runtime.
+#### 3.1.2. Pattern-Specific `AND` Modifier (`!`)
 
-* **Example (`0 12 1 * MON`):**
+To provide a portable method for enabling `AND` logic, OCPS 1.4 introduces the `!` modifier.
 
-  * **Default (OR) Mode:** Triggers at noon on the 1st of the month AND at noon on every Monday.
-
-  * **AND Mode:** Triggers at noon ONLY if the 1st of the month is a Monday.
+  * **Functionality:** When the `!` character precedes the value in the `Day of Week` field, the logical combination for that specific pattern MUST switch from `OR` to `AND`.
+  * **Syntax:**
+      * The `!` modifier is ONLY valid as the first character in the `Day of Week` field.
+      * Its use in any other field or position MUST be treated as a parsing error.
+  * **Example (`0 12 1 * !MON`):**
+      * **Default (OR) `0 12 1 * MON`:** Triggers at noon on the 1st of the month AND at noon on every Monday.
+      * **With `!` Modifier `0 12 1 * !MON`:** Triggers at noon ONLY if the 1st of the month is a Monday.
 
 ### 3.2. `?` Character Definition
 
 The `?` character has historically had different meanings in different cron libraries (e.g., Quartz vs. Vixie cron). OCPS 1.4 addresses this ambiguity.
 
-* **Official Status:** The `?` character is formally defined as **non-portable**. Its use is discouraged in patterns intended to be shared between different OCPS-compliant systems.
+  * **Official Status:** The `?` character is formally defined as **non-portable**. Its use is discouraged in patterns intended to be shared between different OCPS-compliant systems.
+  * **Implementation Behavior:** An implementation MAY support the `?` character. If supported, it SHOULD behave as an alias for the wildcard (`*`).
+  * **Scope and Constraints:**
+      * The `?` character is only meaningful in the `Day of Month` and `Day of Week` fields. Its use in any other field MUST be treated as a parsing error.
+      * An implementation MUST NOT assign any other meaning to `?`.
 
-* **Implementation Behavior:** An implementation MAY support the `?` character. If supported, it SHOULD behave as an alias for the wildcard (`*`). This ensures compatibility with legacy patterns (e.g., from Quartz) where it is used to signify "no specific value" when the other date field is being used.
+### 3.3. Guidance on Implementation Semantics
 
-* **Scope and Constraints:**
+#### 3.3.1. Daylight Saving Time (DST) Transitions
 
-  * The `?` character is only meaningful in the `Day of Month` and `Day of Week` fields. Implementations MUST NOT support its use in any other field.
+For any scheduler implementation, whether it enumerates future run times or polls the current time, handling DST transitions consistently is critical. To align with the time-tested behavior of Vixie cron, the following handling is RECOMMENDED:
 
-  * An implementation MUST NOT assign any other meaning to `?` (such as one-time substitution), as this behavior is not portable.
+  * **DST Gap (Spring Forward):** When a scheduled time falls into a DST gap (an hour that does not exist), the job **SHOULD be skipped**. It should not run earlier or be delayed until after the transition.
+  * **DST Overlap (Fall Back):** When a scheduled time occurs twice due to a DST overlap, the job **SHOULD run only once**, at the first occurrence.
