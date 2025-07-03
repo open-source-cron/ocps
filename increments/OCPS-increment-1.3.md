@@ -49,12 +49,18 @@ The `#` character is used in the `Day of Week` field to specify the "nth" occurr
 
 The `W` character can be used in the `Day of Month` field to find the closest weekday (Monday-Friday) to a given date.
 
-  * **Behavior:**
+* **Behavior:**
     1.  If the specified day of the month is a weekday, the trigger is on that day.
     2.  If the specified day is a Saturday, the trigger is on the preceding Friday.
     3.  If the specified day is a Sunday, the trigger is on the following Monday.
-  * **Example:** `0 12 15W * *` will trigger at noon on the weekday closest to the 15th of the month.
-      * If the 15th is a Wednesday, it triggers on the 15th.
-      * If the 15th is a Saturday, it triggers on Friday the 14th.
-      * If the 15th is a Sunday, it triggers on Monday the 16th.
-  * **Constraint:** The `W` character is a modifier for a single day and cannot be used with ranges or lists. For example, `1-15W` is an invalid pattern.
+    4.  The modifier **will not cross month boundaries**. If a weekend day is at the beginning or end of the month, the search for the nearest weekday is restricted to within that month.
+
+* **Example (`15W`):** `0 12 15W * *` will trigger at noon on the weekday closest to the 15th.
+    * If the 15th is a Wednesday, it triggers on the 15th.
+    * If the 15th is a Saturday, it triggers on Friday the 14th.
+    * If the 15th is a Sunday, it triggers on Monday the 16th.
+
+* **Month Boundary Example (`1W`):** `0 12 1W * *` will trigger at noon on the closest weekday to the 1st of the month.
+    * If the 1st is a Saturday, it triggers on **Monday the 3rd**, as moving to the previous month is not allowed.
+
+* **Constraint:** The `W` character is a modifier for a single day and cannot be used with ranges or lists. For example, `1-15W` is an invalid pattern.
