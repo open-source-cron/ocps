@@ -64,3 +64,15 @@ For any scheduler implementation, whether it enumerates future run times or poll
 
   * **DST Gap (Spring Forward):** When a scheduled time falls into a DST gap (an hour that does not exist), the job **SHOULD be skipped**. It should not run earlier or be delayed until after the transition.
   * **DST Overlap (Fall Back):** When a scheduled time occurs twice due to a DST overlap, the job **SHOULD run only once**, at the first occurrence.
+
+#### 4.3.2. Date and Time Range Limitations
+
+Establishing clear boundaries and calendar semantics is essential for predictable behavior and error handling.
+
+  * **Calendar System:** It is RECOMMENDED that implementations use a single, well-defined calendar system for all date calculations. The Proleptic Gregorian calendar is the preferred choice, as it applies Gregorian leap year rules consistently to dates both in the future and before its historical adoption.
+
+  * **Supported Range:** While OCPS does not mandate a specific range, implementations that support extended dates SHOULD define and document a finite operational range. A recommended pragmatic range is from the beginning of year 1 to the end of year 9999, inclusive.
+      * **Lower Bound (Year 1):** This avoids the complexities and ambiguities associated with year 0 (1 BCE) and pre-Common Era calendar systems. This recommendation is particularly relevant for implementations designed to operate on dates that precede the conventional start of the Unix epoch (1970).
+      * **Upper Bound (Year 9999):** This provides an exceptionally wide window for future scheduling while acting as a crucial safeguard against infinite loops when searching for occurrences of patterns that may never match.
+
+  * **Error Handling:** An attempt to find a scheduled occurrence outside the implementation's documented supported range SHOULD fail and return an out-of-range error.
