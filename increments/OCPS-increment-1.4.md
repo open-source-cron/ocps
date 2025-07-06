@@ -13,7 +13,9 @@ This version does not introduce new scheduling capabilities but instead focuses 
 
 ## 2\. Design Rationale
 
-The focus of OCPS 1.4 is to increase reliability by resolving critical ambiguities between major cron dialects. The most significant divergence is the `AND`/`OR` logic for date fields; this version introduces the `!` modifier as a portable, explicit solution. This inncrement also provides guidance for handling the non-portable `?` character and Daylight Saving Time transitions to further unify behavior across all compliant schedulers.
+The focus of this iteration is to enhance reliability by resolving critical ambiguities between major cron dialects. The most significant of these is the logical operator (AND/OR) used to combine the Day of Month and Day of Week fields when both are restricted. OCPS 1.4 codifies the default behavior as a logical OR (consistent with Vixie cron) and introduces the `!` modifier as a portable, pattern-specific mechanism to explicitly select AND logic.
+
+Furthermore, this version defines the `?` character as formally non-portable, discouraging its use in patterns intended for cross-system use. It also provides explicit recommendations for handling Daylight Saving Time (DST) transitions and out-of-range date calculations to ensure that compliant implementations produce consistent and predictable results.
 
 -----
 
