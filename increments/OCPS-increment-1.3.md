@@ -13,11 +13,9 @@ This version introduces powerful modifiers for complex monthly scheduling scenar
 
 ## 2\. Design Rationale
 
-OCPS 1.3 addresses more complex, real-world scheduling needs by adopting proven features from influential schedulers.
+This iteration introduces syntax to express complex, calendar-based scheduling constraints that are difficult or impossible to define using the baseline syntax. It adopts the `L` (last), `#` (nth), and `W` (closest weekday) modifiers, which are heavily inspired by their implementation in the Quartz scheduler.
 
-  * **Solving Common Business Scenarios:** Standard Vixie cron syntax struggles to express common business requirements like "run on the last Friday of the month" or "trigger on the weekday closest to the 15th." The `L` (Last), `#` (Nth), and `W` (Weekday) modifiers provide a clean, standardized syntax for these exact use cases.
-
-  * **Unifying a Fragmented Ecosystem:** These features are heavily inspired by the powerful and popular Quartz scheduler. Rather than reinventing the wheel, OCPS adopts these well-understood concepts to unify the fragmented cron landscape.
+Rather than defining a new, proprietary syntax, OCPS adopts these proven concepts to provide a standard solution for common scheduling requirements, such as "run on the last Friday of the month." This approach promotes interoperability and leverages a syntax that is already familiar to many developers.
 
 -----
 
