@@ -11,13 +11,9 @@ This document defines version 1.0 of the Open Cron Pattern Specification (OCPS).
 ---
 ## 2. Design Rationale
 
-The design of OCPS 1.0 is guided by the core principles of **stability, familiarity, and incremental introduction**.
+The design of OCPS 1.0 is predicated on establishing a stable, universally understood foundation by codifying the Vixie/ISC cron dialect. This approach ensures that a significant corpus of existing cron patterns is immediately compliant, providing a frictionless adoption path.
 
-* **Vixie Cron as the Foundation:** The specification intentionally codifies the Vixie/ISC cron dialect because it is the most ubiquitous and widely understood cron syntax in the world. By starting with this de facto standard, OCPS ensures that the vast majority of existing cron patterns work as expected, providing immediate value and a frictionless adoption path for developers and system administrators.
-
-* **Intentional Exclusions:** Features from other popular cron dialects, such as Quartz's `?`, `L`, and `W` characters, or support for second-level precision, are deliberately excluded from this baseline version. This maintains the simplicity and stability of the foundation. These and other features are candidates for inclusion in subsequent, backward-compatible increments.
-
-* **Clarification of Ambiguity:** A key goal of OCPS 1.0 is to go beyond a simple restatement of the syntax by providing strict, explicit rules for previously ambiguous or inconsistently handled edge cases (e.g., invalid ranges, step behavior). This ensures that all OCPS 1.0 compliant implementations will behave identically, increasing the reliability and portability of schedules.
+To maintain a strict focus on the core five-field syntax, features that extend beyond it are intentionally deferred. This includes not only modifiers from other dialects (like Quartz's `L`, `W`, `?`) but also scheduling aliases (e.g., `@daily`). While aliases are a common feature of Vixie cron, they are treated as a separate syntactic concept and are introduced in a subsequent version. This keeps the baseline definition clean and focused, with a key objective of providing explicit rules for ambiguous edge cases to ensure all compliant implementations behave identically.
 
 ---
 ## 3. Conformance
