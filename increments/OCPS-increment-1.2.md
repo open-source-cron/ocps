@@ -13,9 +13,9 @@ This version introduces two optional fields for higher-precision scheduling: `se
 
 ## 2. Design Rationale
 
-This iteration introduces syntax to express complex, calendar-based scheduling constraints that are difficult or impossible to define using the baseline syntax. It adopts the `L` (last), `#` (nth), and `W` (closest weekday) modifiers, which are heavily inspired by their implementation in the Quartz scheduler.
+This version extends the temporal resolution of the pattern to meet the requirements of modern applications and to standardize common extensions. The introduction of an optional seconds field addresses the need for sub-minute scheduling granularity, which is a frequent requirement in distributed systems and monitoring services. The optional year field enables the definition of long-term, non-recurring schedules without requiring external logic.
 
-Rather than defining a new, proprietary syntax, OCPS adopts these proven concepts to provide a standard solution for common scheduling requirements, such as "run on the last Friday of the month." This approach promotes interoperability and leverages a syntax that is already familiar to many developers.
+A critical design constraint is backward compatibility. Making these fields optional ensures that any valid 5-field pattern from previous OCPS versions remains valid and behaves identically. The placement of the `seconds` field (prepended) and `year` field (appended) follows established conventions, promoting predictability for implementers.
 
 ---
 
