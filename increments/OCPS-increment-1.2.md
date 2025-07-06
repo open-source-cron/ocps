@@ -13,13 +13,9 @@ This version introduces two optional fields for higher-precision scheduling: `se
 
 ## 2. Design Rationale
 
-The introduction of optional `seconds` and `year` fields is driven by the scheduling needs of **modern applications** and the goal of **standardizing common extensions**.
+This iteration introduces syntax to express complex, calendar-based scheduling constraints that are difficult or impossible to define using the baseline syntax. It adopts the `L` (last), `#` (nth), and `W` (closest weekday) modifiers, which are heavily inspired by their implementation in the Quartz scheduler.
 
-* **Addressing Modern Needs:** The original cron utility's one-minute precision was sufficient for the system administration tasks of its era. However, modern applications in areas like real-time monitoring, data processing, and distributed systems often require scheduling granularity below one minute. Similarly, the ability to specify a year is crucial for tasks that should only run in a specific year or for long-term scheduling without the need for external checks. OCPS 1.2 addresses these needs directly.
-
-* **Standardizing Common Extensions:** Many cron libraries have independently added support for a `seconds` field and, less commonly, a `year` field. This has led to further fragmentation. OCPS 1.2 provides a single, standard way to implement these features. The `seconds` field is prepended to the pattern, which is the most common convention and follows a logical time hierarchy. The `year` field is appended, a convention seen in other extended cron formats.
-
-* **Preserving Backward Compatibility:** A critical design choice was to make the new fields optional. This ensures that every valid 5-field pattern from OCPS 1.0 and 1.1 remains valid and behaves identically in an OCPS 1.2-compliant implementation. Similarly, 6-field patterns with only the `seconds` field are also fully supported.
+Rather than defining a new, proprietary syntax, OCPS adopts these proven concepts to provide a standard solution for common scheduling requirements, such as "run on the last Friday of the month." This approach promotes interoperability and leverages a syntax that is already familiar to many developers.
 
 ---
 
