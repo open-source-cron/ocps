@@ -48,6 +48,8 @@ This repository is structured to provide two views of the specification:
 
 The official specification documents are linked below.
 
+Progess for each iteration is tracked through [milstones](https://github.com/open-source-cron/ocps/milestones).
+
 | Version | Status | Title | Incremental Change | Full Specification |
 | :--- | :---: | :--- | :--- | :--- |
 | **1.4** | DRAFT | Logical & Implementation Semantics | [1.4 Increment](https://www.google.com/search?q=./increments/OCPS-increment-1.4.md) | N/A |
