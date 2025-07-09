@@ -56,7 +56,7 @@ Progress for each iteration is tracked through [milestones](https://github.com/o
 | **1.3** | DRAFT | Advanced Calendar Scheduling | [1.3 Increment](https://www.google.com/search?q=./increments/OCPS-increment-1.3.md) | N/A |
 | **1.2** | DRAFT | Second-Level Precision | [1.2 Increment](https://www.google.com/search?q=./increments/OCPS-increment-1.2.md) | N/A |
 | **1.1** | DRAFT | Pre-defined Schedules | [1.1 Increment](https://www.google.com/search?q=./increments/OCPS-increment-1.1.md) | N/A |
-| **1.0** | DRAFT | The Baseline | [1.0 Increment](https://www.google.com/search?q=./increments/OCPS-increment-1.0.md) | N/A |
+| **1.0** | DRAFT | The Baseline | N/A | [WIP at PR#6](https://github.com/open-source-cron/ocps/pull/6) |
 
 -----
 
