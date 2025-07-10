@@ -74,7 +74,7 @@ This project is in its draft stages. Contributions, suggestions, and feedback ar
 
 ### Contribution Guidelines
 
-All issues regarding the specification and organization of OCPS (Open Cron Initiative) are handled as issues on this repository (`github.com/open-source-cron/ocps`).
+All issues regarding the specification and organization of OCPS are handled as issues on this repository (https://github.com/open-source-cron/ocps).
 
 The **finalization of the next iteration** of the specification is handled as a pull request that creates a full specification document from its corresponding draft increment. All discussions pertinent to this finalization should occur within that pull request.
 
