@@ -1,6 +1,6 @@
 # OCPS: The Open Cron Pattern Specification
 
-**Status: DRAFT**
+**Status:** RELEASED (1.0) | IN DEVELOPMENT (1.1+)
 
 ## 1. Abstract
 
@@ -40,13 +40,15 @@ This repository is structured to provide two views of the specification:
 
 The official specification documents are linked below.
 
+Progress for each iteration is tracked through [milestones](https://github.com/open-source-cron/ocps/milestones).
+
 | Version | Status | Title | Incremental Change | Full Specification |
 | :--- | :---: | :--- | :--- | :--- |
 | **1.4** | DRAFT | Logical & Implementation Semantics | [1.4 Increment](./increments/OCPS-increment-1.4.md) | N/A |
 | **1.3** | DRAFT | Advanced Calendar Scheduling | [1.3 Increment](./increments/OCPS-increment-1.3.md) | N/A |
-| **1.2** | DRAFT | Second-Level Precision | [1.2 Increment](./increments/OCPS-increment-1.2.md) | N/A |
+| **1.2** | DRAFT | Second and Year-Level Precision | [1.2 Increment](./increments/OCPS-increment-1.2.md) | N/A |
 | **1.1** | DRAFT | Pre-defined Schedules | [1.1 Increment](./increments/OCPS-increment-1.1.md) | N/A |
-| **1.0** | DRAFT | The Baseline | [1.0 Increment](./increments/OCPS-increment-1.0.md) | N/A |
+| **1.0** | **FINAL** | The Baseline | N/A | **[OCPS 1.0](./specifications/OCPS-1.0.md)** · [Release Notes](./RELEASE-NOTES-1.0.0.md) |
 
 ## 6. Conformance & Implementations
 
@@ -56,7 +58,17 @@ For a list of known libraries and their current conformance levels, please see t
 
 ## 7. Contributing
 
-This project is in its draft stages. Contributions, suggestions, and feedback are welcome. Please open an issue to start a discussion.
+Contributions, suggestions, and feedback are welcome. Please open an issue to start a discussion.
+
+### Contribution Guidelines
+
+All issues regarding the specification and organization of OCPS are handled as issues on this repository (https://github.com/open-source-cron/ocps).
+
+The **finalization of the next iteration** of the specification is handled as a pull request that creates a full specification document from its corresponding draft increment. All discussions pertinent to this finalization should occur within that pull request.
+
+Discussions on **future iterations, new feature requests, or proposed problems/improvements** are handled as separate issues and should be tagged appropriately (e.g., `feature-request`, `discussion`, `problem`, `enhancement`). When proposing changes to future iterations, it is **highly encouraged to open a pull request** with your proposed changes to facilitate discussion and review.
+
+Changes to this **README** should always be submitted as a pull request.
 
 ### Updating the Conformance Matrix
 The Implementation Conformance Matrix is automatically generated from the `data/conformance.json` file. To propose changes, please edit `data/conformance.json` and submit a pull request.
