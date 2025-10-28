@@ -5,7 +5,7 @@
 
 ## 1. Introduction
 
-This document defines version 1.2 of the Open Cron Pattern Specification (OCPS). It is a backward-compatible superset of [OCPS 1.1](https://www.google.com/search?q=./1.1.md).
+This document defines version 1.2 of the Open Cron Pattern Specification (OCPS). It is a backward-compatible superset of [OCPS 1.1](./OCPS-increment-1.1.md).
 
 This version introduces two optional fields for higher-precision scheduling: `seconds` and `year`.
 

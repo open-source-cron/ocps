@@ -5,7 +5,7 @@
 
 ## 1\. Introduction
 
-This document defines version 1.3 of the Open Cron Pattern Specification (OCPS). It is a backward-compatible superset of [OCPS 1.2](https://www.google.com/search?q=./1.2.md).
+This document defines version 1.3 of the Open Cron Pattern Specification (OCPS). It is a backward-compatible superset of [OCPS 1.2](./OCPS-increment-1.2.md).
 
 This version introduces powerful modifiers for complex monthly scheduling scenarios, including `L` (last), `#` (nth), and `W` (closest weekday).
 

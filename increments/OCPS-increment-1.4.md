@@ -5,7 +5,7 @@
 
 ## 1\. Introduction
 
-This document defines version 1.4 of the Open Cron Pattern Specification (OCPS). It is a backward-compatible superset of [OCPS 1.3](https://www.google.com/search?q=./1.3.md).
+This document defines version 1.4 of the Open Cron Pattern Specification (OCPS). It is a backward-compatible superset of [OCPS 1.3](./OCPS-increment-1.3.md).
 
 This version does not introduce new scheduling capabilities but instead focuses on standardizing evaluation logic and clarifying implementation-specific ambiguities.
 

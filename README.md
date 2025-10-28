@@ -52,10 +52,10 @@ Progress for each iteration is tracked through [milestones](https://github.com/o
 
 | Version | Status | Title | Incremental Change | Full Specification |
 | :--- | :---: | :--- | :--- | :--- |
-| **1.4** | DRAFT | Logical & Implementation Semantics | [1.4 Increment](https://www.google.com/search?q=./increments/OCPS-increment-1.4.md) | N/A |
-| **1.3** | DRAFT | Advanced Calendar Scheduling | [1.3 Increment](https://www.google.com/search?q=./increments/OCPS-increment-1.3.md) | N/A |
-| **1.2** | DRAFT | Second and Year-Level Precision | [1.2 Increment](https://www.google.com/search?q=./increments/OCPS-increment-1.2.md) | N/A |
-| **1.1** | DRAFT | Pre-defined Schedules | [1.1 Increment](https://www.google.com/search?q=./increments/OCPS-increment-1.1.md) | N/A |
+| **1.4** | DRAFT | Logical & Implementation Semantics | [1.4 Increment](./increments/OCPS-increment-1.4.md) | N/A |
+| **1.3** | DRAFT | Advanced Calendar Scheduling | [1.3 Increment](./increments/OCPS-increment-1.3.md) | N/A |
+| **1.2** | DRAFT | Second and Year-Level Precision | [1.2 Increment](./increments/OCPS-increment-1.2.md) | N/A |
+| **1.1** | DRAFT | Pre-defined Schedules | [1.1 Increment](./increments/OCPS-increment-1.1.md) | N/A |
 | **1.0** | DRAFT | The Baseline | N/A | [WIP at PR#6](https://github.com/open-source-cron/ocps/pull/6) |
 
 -----
@@ -64,7 +64,7 @@ Progress for each iteration is tracked through [milestones](https://github.com/o
 
 Each full specification document contains a "Conformance" section detailing the requirements for an implementation to claim compliance with that version.
 
-For a list of known libraries and their current conformance levels, please see the **[Implementation Conformance Matrix](https://www.google.com/search?q=./CONFORMANCE.md)**.
+For a list of known libraries and their current conformance levels, please see the **[Implementation Conformance Matrix](./CONFORMANCE.md)**.
 
 -----
 
