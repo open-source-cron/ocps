@@ -2,7 +2,7 @@
 
 **Status:** FINAL  
 **Revision:** 1  
-**Date:** 2025-07-03    
+**Date:** 2025-10-28    
 
 ## 1. Introduction
 
@@ -43,6 +43,35 @@ An OCPS 1.0 pattern MUST consist of five fields separated by whitespace. A compl
 
 * Month and Day of Week names MUST be treated as case-insensitive.
 * In the Day of Week field, `0` and `7` MUST both be treated as Sunday.
+
+#### Month Name Equivalents
+
+| Name | Numeric Value |
+| :--- | :--- |
+| JAN | 1 |
+| FEB | 2 |
+| MAR | 3 |
+| APR | 4 |
+| MAY | 5 |
+| JUN | 6 |
+| JUL | 7 |
+| AUG | 8 |
+| SEP | 9 |
+| OCT | 10 |
+| NOV | 11 |
+| DEC | 12 |
+
+#### Day of Week Name Equivalents
+
+| Name | Numeric Value |
+| :--- | :--- |
+| SUN | 0 or 7 |
+| MON | 1 |
+| TUE | 2 |
+| WED | 3 |
+| THU | 4 |
+| FRI | 5 |
+| SAT | 6 |
 
 ### 4.3. Character Set
 
@@ -111,4 +140,4 @@ A compliant parser or scheduler MUST interpret the pattern against the implement
 
 | Revision | Date | Author(s) | Description of Changes |
 | :--- | :--- | :--- | :--- |
-| 1 | 2025-07-03 | The OCPS Authors | Initial publication of the 1.0 specification. |
+| 1 | 2025-10-28 | The OCPS Authors | Initial publication of the 1.0 specification. |
