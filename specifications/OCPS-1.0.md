@@ -1,7 +1,8 @@
 # OCPS 1.0: The Baseline
 
-**Status: DRAFT**
-**Date: 2025-07-03**
+**Status:** FINAL  
+**Revision:** 1  
+**Date:** 2025-10-28    
 
 ## 1. Introduction
 
@@ -10,13 +11,9 @@ This document defines version 1.0 of the Open Cron Pattern Specification (OCPS).
 ---
 ## 2. Design Rationale
 
-The design of OCPS 1.0 is guided by the core principles of **stability, familiarity, and incremental introduction**.
+The design of OCPS 1.0 is predicated on establishing a stable, universally understood foundation by codifying the Vixie/ISC cron dialect. This approach ensures that a significant corpus of existing cron patterns is immediately compliant, providing a frictionless adoption path.
 
-* **Vixie Cron as the Foundation:** The specification intentionally codifies the Vixie/ISC cron dialect because it is the most ubiquitous and widely understood cron syntax in the world. By starting with this de facto standard, OCPS ensures that the vast majority of existing cron patterns work as expected, providing immediate value and a frictionless adoption path for developers and system administrators.
-
-* **Intentional Exclusions:** Features from other popular cron dialects, such as Quartz's `?`, `L`, and `W` characters, or support for second-level precision, are deliberately excluded from this baseline version. This maintains the simplicity and stability of the foundation. These and other features are candidates for inclusion in subsequent, backward-compatible increments.
-
-* **Clarification of Ambiguity:** A key goal of OCPS 1.0 is to go beyond a simple restatement of the syntax by providing strict, explicit rules for previously ambiguous or inconsistently handled edge cases (e.g., invalid ranges, step behavior). This ensures that all OCPS 1.0 compliant implementations will behave identically, increasing the reliability and portability of schedules.
+To maintain a strict focus on the core five-field syntax, features that extend beyond it are intentionally deferred. This includes not only modifiers from other dialects (like Quartz's `L`, `W`, `?`) but also scheduling aliases (e.g., `@daily`). While aliases are a common feature of Vixie cron, they are treated as a separate syntactic concept and are introduced in a subsequent version. This keeps the baseline definition clean and focused, with a key objective of providing explicit rules for ambiguous edge cases to ensure all compliant implementations behave identically.
 
 ---
 ## 3. Conformance
@@ -36,16 +33,45 @@ An OCPS 1.0 pattern MUST consist of five fields separated by whitespace. A compl
 
 ### 4.2. Field Values
 
-| Field          | Required | Allowed Values  |
-| :------------- | :------- | :-------------- |
-| **Minute** | Yes      | 0-59            |
-| **Hour** | Yes      | 0-23            |
-| **Day of Month** | Yes      | 1-31            |
-| **Month** | Yes      | 1-12 or JAN-DEC |
-| **Day of Week** | Yes      | 0-7 or SUN-SAT  |
+| Field | Required | Allowed Values |
+| :--- | :--- | :--- |
+| **Minute** | Yes | 0-59 |
+| **Hour** | Yes | 0-23 |
+| **Day of Month** | Yes | 1-31 |
+| **Month** | Yes | 1-12 or JAN-DEC |
+| **Day of Week**| Yes | 0-7 or SUN-SAT |
 
 * Month and Day of Week names MUST be treated as case-insensitive.
 * In the Day of Week field, `0` and `7` MUST both be treated as Sunday.
+
+#### Month Name Equivalents
+
+| Name | Numeric Value |
+| :--- | :--- |
+| JAN | 1 |
+| FEB | 2 |
+| MAR | 3 |
+| APR | 4 |
+| MAY | 5 |
+| JUN | 6 |
+| JUL | 7 |
+| AUG | 8 |
+| SEP | 9 |
+| OCT | 10 |
+| NOV | 11 |
+| DEC | 12 |
+
+#### Day of Week Name Equivalents
+
+| Name | Numeric Value |
+| :--- | :--- |
+| SUN | 0 or 7 |
+| MON | 1 |
+| TUE | 2 |
+| WED | 3 |
+| THU | 4 |
+| FRI | 5 |
+| SAT | 6 |
 
 ### 4.3. Character Set
 
@@ -58,12 +84,12 @@ After converting any textual representations (e.g., `JAN`, `SUN`) to their numer
 ---
 ## 5. Special Characters
 
-| Character | Name           | Example      | Description                                                                                                |
-| :-------- | :------------- | :----------- | :--------------------------------------------------------------------------------------------------------- |
-| `*`       | Wildcard       | `* * * * *`  | Matches every allowed value for the field.                                                                 |
-| `,`       | List Separator | `0,15,30,45` | Specifies a list of individual values.                                                                     |
-| `-`       | Range          | `9-17`       | Specifies an inclusive range of values.                                                                    |
-| `/`       | Step           | `5-59/15`    | Specifies an interval. The step operates on the range it modifies, yielding `5,20,35,50` for this example. |
+| Character | Name | Example | Description |
+| :--- | :--- | :--- | :--- |
+| `*` | Wildcard | `* * * * *` | Matches every allowed value for the field. |
+| `,` | List Separator | `0,15,30,45` | Specifies a list of individual values. |
+| `-` | Range | `9-17` | Specifies an inclusive range of values. |
+| `/` | Step | `5-59/15` | Specifies an interval. The step operates on the range it modifies, yielding `5,20,35,50` for this example. |
 
 ### 5.1. Combining Special Characters
 
@@ -108,3 +134,10 @@ To allow for flexibility while maintaining a stable standard, the following rule
 OCPS 1.0 patterns are **timezone-agnostic**.
 
 A compliant parser or scheduler MUST interpret the pattern against the implementation's local time. The mechanism for defining this local time is an implementation detail, as per Section 6.3.
+
+---
+## Appendix A: Revision History
+
+| Revision | Date | Author(s) | Description of Changes |
+| :--- | :--- | :--- | :--- |
+| 1 | 2025-10-28 | The OCPS Authors | Initial publication of the 1.0 specification. |
