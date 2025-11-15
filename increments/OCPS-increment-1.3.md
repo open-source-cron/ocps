@@ -62,3 +62,19 @@ The `W` character can be used in the `Day of Month` field to find the closest we
     * If the 1st is a Saturday, it triggers on **Monday the 3rd**, as moving to the previous month is not allowed.
 
 * **Constraint:** The `W` character is a modifier for a single day and cannot be used with ranges or lists. For example, `1-15W` is an invalid pattern.
+
+#### 4.3.1. Behavior with Non-Existing Days
+
+When the `W` modifier is used with a day number that does not exist in a particular month (e.g., `31W` in February, or `30W` in February), the pattern **will not match any date in that month**. The job will not be scheduled to run during months where the specified day does not exist.
+
+This behavior ensures predictable and consistent scheduling across implementations, avoiding ambiguity about whether to fallback to the last day of the month, skip the month entirely, or use other heuristics.
+
+* **Example (`31W`):** The pattern `0 12 31W * *` will trigger at noon on the weekday closest to the 31st.
+    * In months with 31 days (January, March, May, July, August, October, December), it will trigger on the 31st if it's a weekday, or the nearest weekday within that month.
+    * In months with fewer than 31 days (February, April, June, September, November), **the pattern will not match** and the job will not run in those months.
+
+* **Example (`30W`):** The pattern `0 0 30W * *` will trigger at midnight on the weekday closest to the 30th.
+    * In months with 30 or 31 days, it will trigger on the 30th if it's a weekday, or the nearest weekday within that month.
+    * In February (with 28 or 29 days), **the pattern will not match** and the job will not run.
+
+**Rationale:** This approach is consistent with the behavior observed in widely-used cron implementations including Quartz Scheduler, Spring Framework, Cronos (.NET), dragonmantank/cron-expression (PHP), and croner-rust. It prevents unexpected behavior and maintains the principle that `W` operates only on valid calendar days within the current month.
