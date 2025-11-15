@@ -65,8 +65,8 @@ The `W` character can be used in the `Day of Month` field to find the closest we
 
 #### 4.3.1. Behavior with Non-Existing Days
 
-When the `W` modifier is used with a day number that does not exist in a particular month (e.g., `31W` in February), the pattern **will not match any date in that month**.
+When the `W` modifier is used with a day number that does not exist in a particular month (e.g., `31W` in February), the pattern **will not match any date in that month**. The job will simply not be scheduled to run during those months.
 
-* **Example:** `0 12 31W * *` triggers only in months with 31 days (Jan, Mar, May, Jul, Aug, Oct, Dec). It does not run in months with fewer days (Feb, Apr, Jun, Sep, Nov).
-
-This behavior is consistent with Quartz, Spring, Cronos, and other major implementations.
+* **Example:** `0 12 31W * *` triggers at noon on the nearest weekday to the 31st.
+    * In months with 31 days (Jan, Mar, May, Jul, Aug, Oct, Dec), it triggers as expected.
+    * In months with fewer days (Feb, Apr, Jun, Sep, Nov), the pattern does not match and the job does not run.
