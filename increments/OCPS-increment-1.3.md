@@ -70,3 +70,9 @@ When the `W` modifier is used with a day number that does not exist in a particu
 * **Example:** `0 12 31W * *` triggers at noon on the nearest weekday to the 31st.
     * In months with 31 days (Jan, Mar, May, Jul, Aug, Oct, Dec), it triggers as expected.
     * In months with fewer days (Feb, Apr, Jun, Sep, Nov), the pattern does not match and the job does not run.
+
+To schedule on the last weekday of every month regardless of month length, combine `L` and `W` as `LW`:
+
+* **Example:** `0 12 LW * *` triggers at noon on the last weekday of the month.
+    * If the last day is a weekday, it triggers on that day.
+    * If the last day is a weekend, it triggers on the preceding Friday.
