@@ -1,0 +1,93 @@
+name: Validate Documentation
+
+on:
+  pull_request:
+    paths:
+      - '**.md'
+  push:
+    branches:
+      - main
+    paths:
+      - '**.md'
+
+jobs:
+  validate-links:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        
+      - name: Check for broken relative links
+        run: |
+          echo "Checking for broken relative links in markdown files..."
+          
+          # Function to check if a file exists
+          check_link() {
+            local file="$1"
+            local link="$2"
+            local dir=$(dirname "$file")
+            
+            # Skip external links
+            if [[ "$link" =~ ^https?:// ]]; then
+              return 0
+            fi
+            
+            # Skip anchors only
+            if [[ "$link" =~ ^# ]]; then
+              return 0
+            fi
+            
+            # Remove anchor from link
+            local path="${link%%#*}"
+            
+            # Resolve relative path
+            local full_path="$dir/$path"
+            
+            if [ ! -e "$full_path" ]; then
+              echo "::error file=$file::Broken link found: $link (resolved to $full_path)"
+              return 1
+            fi
+            return 0
+          }
+          
+          error_count=0
+          
+          # Find all markdown files and check their links
+          while IFS= read -r file; do
+            # Extract markdown links [text](url)
+            grep -oP '\[([^\]]+)\]\(([^\)]+)\)' "$file" | while IFS= read -r match; do
+              link=$(echo "$match" | sed -n 's/.*](\([^)]*\)).*/\1/p')
+              if ! check_link "$file" "$link"; then
+                error_count=$((error_count + 1))
+              fi
+            done
+          done < <(find . -name "*.md" -not -path "./.git/*" -not -path "./node_modules/*")
+          
+          if [ $error_count -gt 0 ]; then
+            echo "Found $error_count broken link(s)"
+            exit 1
+          fi
+          
+          echo "✓ No broken links found"
+
+  markdown-lint:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        
+      - name: Run markdown lint
+        uses: DavidAnson/markdownlint-cli2-action@v18
+        with:
+          globs: |
+            **/*.md
+            !node_modules
+          config: |
+            {
+              "default": true,
+              "MD013": false,
+              "MD033": false,
+              "MD041": false
+            }
