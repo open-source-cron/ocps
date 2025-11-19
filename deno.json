@@ -1,0 +1,12 @@
+{
+  "tasks": {
+    "generate": "cd scripts && deno run -A generate-conformance-report.ts",
+    "generate:check": "cd scripts && deno run -A generate-conformance-report.ts && cd .. && git diff --exit-code CONFORMANCE.md"
+  },
+  "fmt": {
+    "exclude": ["data/", "CONFORMANCE.md"]
+  },
+  "lint": {
+    "exclude": ["data/", "CONFORMANCE.md"]
+  }
+}

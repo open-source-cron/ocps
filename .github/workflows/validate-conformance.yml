@@ -1,0 +1,38 @@
+name: Validate Conformance Report
+
+on:
+  pull_request:
+    paths:
+      - 'data/conformance.json'
+      - 'scripts/generate-conformance-report.ts'
+      - 'CONFORMANCE.md'
+  push:
+    branches:
+      - main
+    paths:
+      - 'data/conformance.json'
+      - 'scripts/generate-conformance-report.ts'
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        
+      - name: Setup Deno
+        uses: denoland/setup-deno@v1
+        with:
+          deno-version: v1.x
+          
+      - name: Generate conformance report
+        run: deno task generate
+        
+      - name: Check if CONFORMANCE.md is up to date
+        run: |
+          if ! git diff --exit-code CONFORMANCE.md; then
+            echo "Error: CONFORMANCE.md is not up to date with conformance.json"
+            echo "Please run 'deno task generate' and commit the changes"
+            exit 1
+          fi
