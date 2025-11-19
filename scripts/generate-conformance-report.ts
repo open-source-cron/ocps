@@ -73,14 +73,31 @@ interface ConformanceData {
 async function generateConformanceReport() {
   try {
     // 1. Read and parse the JSON data
+    console.log('Reading conformance.json...');
     const jsonText = await Deno.readTextFile('../data/conformance.json');
-    const data: ConformanceData = JSON.parse(jsonText);
+    
+    let data: ConformanceData;
+    try {
+      data = JSON.parse(jsonText);
+    } catch (parseError) {
+      console.error('Failed to parse conformance.json:', parseError);
+      Deno.exit(1);
+    }
+
+    // Validate data structure
+    if (!data.legend || !data.categories || !data.references) {
+      console.error('Invalid conformance.json structure: missing required fields');
+      Deno.exit(1);
+    }
 
     const versions = getVersions(data);
     const libraries = getLibraries(data);
     const usedReferenceIds = getUsedReferenceIds(data);
 
+    console.log(`Found ${versions.length} versions and ${libraries.length} libraries`);
+
     // 2. Generate dynamic parts of the Markdown
+    console.log('Generating report sections...');
     const legend = generateLegend(data.legend);
     const adoptionSummary = generateAdoptionSummary(versions, libraries);
     const tables = generateAllTables(data.categories, versions, data.legend);
@@ -98,11 +115,13 @@ async function generateConformanceReport() {
       .trim();
 
     // 4. Write the output file
+    console.log('Writing CONFORMANCE.md...');
     await Deno.writeTextFile('../CONFORMANCE.md', md);
-    console.log('Successfully generated CONFORMANCE.md');
+    console.log('✓ Successfully generated CONFORMANCE.md');
 
   } catch (error) {
     console.error('Error generating conformance report:', error);
+    Deno.exit(1);
   }
 }
 

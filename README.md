@@ -86,7 +86,16 @@ Changes to this **README** should always be submitted as a pull request.
 
 The Implementation Conformance Matrix is automatically generated from the `data/conformance.json` file. To propose changes, please edit `data/conformance.json` and submit a pull request.
 
-If you wish to regenerate the `CONFORMANCE.md` file locally to preview your changes, you can run the generation script. This requires Deno to be installed.
+If you wish to regenerate the `CONFORMANCE.md` file locally to preview your changes, you can run the generation script. This requires [Deno](https://deno.land/) to be installed.
 
-**From the root of the repository:**
-`cd scripts && deno run -A generate-conformance-report.ts`
+**Using the deno task (recommended):**
+```bash
+deno task generate
+```
+
+**Or directly:**
+```bash
+cd scripts && deno run -A generate-conformance-report.ts
+```
+
+**Note:** Pull requests that modify `data/conformance.json` will be automatically validated by GitHub Actions to ensure `CONFORMANCE.md` is kept in sync.
