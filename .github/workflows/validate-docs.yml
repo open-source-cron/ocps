@@ -87,13 +87,4 @@ jobs:
       - name: Run markdown lint
         uses: DavidAnson/markdownlint-cli2-action@v18
         with:
-          globs: |
-            **/*.md
-            !node_modules
-          config: |
-            {
-              "default": true,
-              "MD013": false,
-              "MD033": false,
-              "MD041": false
-            }
+          globs: '**/*.md'
