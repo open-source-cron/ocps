@@ -118,7 +118,7 @@ A range `A-B` where `A` is greater than `B` is invalid. A parser MUST treat this
 #### Invalid Step Syntax
 A parser MUST reject the following step-related patterns as parsing errors:
 * A step value of `0` (e.g., `*/0`), as it has no logical definition.
-* A step operator without a preceding wildcard or range (e.g., `/30`). The `/` character MUST be preceded by either `*` or a range in the form `A-B`.
+* A step operator without a preceding wildcard or range (e.g., `/30` or `10/10`). The `/` character MUST be preceded by either `*` or a range in the form `A-B` where A and B are both specified (e.g., `*/30` or `10-50/10` are valid, but `/30` or `10/10` are not).
 
 #### Impossible Date Combinations
 A pattern containing a valid but impossible date (e.g., `* * 31 2 *` for February 31st) MUST be considered syntactically valid and MUST NOT cause a parsing error.
