@@ -7,13 +7,23 @@ function assert(condition: boolean, message: string): void {
   }
 }
 
-function assertExists(value: any, message: string): void {
+function assertExists(value: unknown, message: string): void {
   assert(value !== null && value !== undefined, message);
 }
 
+// Cache for parsed conformance data to avoid redundant file I/O
+let cachedConformanceData: any = null;
+
+async function getConformanceData() {
+  if (!cachedConformanceData) {
+    const jsonText = await Deno.readTextFile('./data/conformance.json');
+    cachedConformanceData = JSON.parse(jsonText);
+  }
+  return cachedConformanceData;
+}
+
 Deno.test("conformance.json exists and is valid JSON", async () => {
-  const jsonText = await Deno.readTextFile('./data/conformance.json');
-  const data = JSON.parse(jsonText);
+  const data = await getConformanceData();
   
   assertExists(data.legend, "legend should exist");
   assertExists(data.categories, "categories should exist");
@@ -23,8 +33,7 @@ Deno.test("conformance.json exists and is valid JSON", async () => {
 });
 
 Deno.test("all categories have required fields", async () => {
-  const jsonText = await Deno.readTextFile('./data/conformance.json');
-  const data = JSON.parse(jsonText);
+  const data = await getConformanceData();
   
   for (const category of data.categories) {
     assertExists(category.name, `Category missing name`);
@@ -36,8 +45,7 @@ Deno.test("all categories have required fields", async () => {
 });
 
 Deno.test("all items have compliance data", async () => {
-  const jsonText = await Deno.readTextFile('./data/conformance.json');
-  const data = JSON.parse(jsonText);
+  const data = await getConformanceData();
   
   let itemCount = 0;
   for (const category of data.categories) {
@@ -53,34 +61,25 @@ Deno.test("all items have compliance data", async () => {
 });
 
 Deno.test("conformance generation creates output file", async () => {
-  // Import and run the generation function
-  const originalCwd = Deno.cwd();
+  // Run the generation script from the scripts directory using cwd option
+  const command = new Deno.Command("deno", {
+    args: ["run", "-A", "generate-conformance-report.ts"],
+    cwd: "./scripts",
+    stdout: "piped",
+    stderr: "piped",
+  });
   
-  try {
-    // Change to scripts directory as the script expects to run from there
-    Deno.chdir('./scripts');
-    
-    // Run the generation
-    const command = new Deno.Command("deno", {
-      args: ["run", "-A", "generate-conformance-report.ts"],
-      stdout: "piped",
-      stderr: "piped",
-    });
-    
-    const { code, stdout, stderr } = await command.output();
-    
-    const output = new TextDecoder().decode(stdout);
-    const errors = new TextDecoder().decode(stderr);
-    
-    assert(code === 0, `Generation failed with errors: ${errors}`);
-    assert(output.includes("Successfully generated CONFORMANCE.md"), "Success message not found in output");
-    
-    // Verify the file was created
-    const stats = await Deno.stat("../CONFORMANCE.md");
-    assert(stats.isFile, "CONFORMANCE.md was not created");
-    
-    console.log("✓ Conformance report generation successful");
-  } finally {
-    Deno.chdir(originalCwd);
-  }
+  const { code, stdout, stderr } = await command.output();
+  
+  const output = new TextDecoder().decode(stdout);
+  const errors = new TextDecoder().decode(stderr);
+  
+  assert(code === 0, `Generation failed with errors: ${errors}`);
+  assert(output.includes("Successfully generated CONFORMANCE.md"), "Success message not found in output");
+  
+  // Verify the file was created
+  const stats = await Deno.stat("./CONFORMANCE.md");
+  assert(stats.isFile, "CONFORMANCE.md was not created");
+  
+  console.log("✓ Conformance report generation successful");
 });
