@@ -1,0 +1,6 @@
+{
+  "tasks": {
+    "generate": "cd scripts && deno run -A generate-conformance-report.ts",
+    "test": "deno test -A scripts/"
+  }
+}

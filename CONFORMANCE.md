@@ -128,6 +128,6 @@ This table shows the percentage of the 17 libraries listed below that meet diffe
 
 
 ---
-*This document is automatically generated from [data/conformance.json](./data/conformance.json) on 2025-10-28.*
+*This document is automatically generated from [data/conformance.json](./data/conformance.json) on 2025-11-21.*
 
 *This table is based on analysis of official documentation and community knowledge. For the most accurate details, please refer to the documentation of the respective libraries.*

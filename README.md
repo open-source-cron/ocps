@@ -89,4 +89,20 @@ The Implementation Conformance Matrix is automatically generated from the `data/
 If you wish to regenerate the `CONFORMANCE.md` file locally to preview your changes, you can run the generation script. This requires Deno to be installed.
 
 **From the root of the repository:**
-`cd scripts && deno run -A generate-conformance-report.ts`
+```bash
+cd scripts && deno run -A generate-conformance-report.ts
+```
+
+### Running Tests
+
+The repository includes tests for the conformance data and generation script. To run the tests, you need Deno installed.
+
+**From the root of the repository:**
+```bash
+deno test -A scripts/
+```
+
+Or use the task defined in `deno.json`:
+```bash
+deno task test
+```
