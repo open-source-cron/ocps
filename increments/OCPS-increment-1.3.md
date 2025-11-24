@@ -27,8 +27,10 @@ An implementation is "OCPS 1.3 Compliant" if it meets all OCPS 1.2 requirements 
 
 ## 4\. New Special Characters in OCPS 1.3
 
+The `L` and `W` modifiers defined in this section MUST be treated as case-sensitive.
+
 ### 4.1. `L` (Last) Modifier
-The `L` character can be used in the `Day of Month` and `Day of Week` fields. The `L` and `W` modifiers defined in this specification MUST be treated as case-sensitive.
+The `L` character can be used in the `Day of Month` and `Day of Week` fields.
 
 * **In `Day of Month`:** `L` stands for the last day of the month.
     * **Example:** `0 0 L * *` triggers at midnight on the last day of every month (e.g., Jan 31, Feb 28/29, etc.).
