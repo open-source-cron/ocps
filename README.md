@@ -1,16 +1,14 @@
 # OCPS: The Open Cron Pattern Specification
 
-**Status: 1.0 RELEASED**
+**📘 [Read the OCPS 1.0 Specification](./specifications/OCPS-1.0.md)** — The official 1.0 release is now available!
 
-## 1\. Abstract
+---
 
-OCPS (Open Cron Pattern Specification) is an open specification that aims to resolve the long-standing fragmentation and ambiguity in cron expression syntax. It defines a well-defined, backward-compatible superset of the Vixie-cron format. The goal of OCPS is to provide a reliable, feature-rich, and incrementally adoptable standard that allows developers to write portable and predictable schedules across any compliant tool.
+OCPS (Open Cron Pattern Specification) is an open specification that resolves the long-standing fragmentation and ambiguity in cron expression syntax. It defines a well-defined, backward-compatible superset of the Vixie-cron format, providing a reliable, feature-rich, and incrementally adoptable standard that allows developers to write portable and predictable schedules across any compliant tool.
 
 This repository contains the official versioned specifications for OCPS.
 
------
-
-## 2\. Background: The Evolution of Cron
+## Background: The Evolution of Cron
 
 The `cron` utility has a long history with several evolutionary paths. Understanding this history is key to understanding why OCPS is structured the way it is.
 
@@ -26,27 +24,19 @@ The `cron` utility has a long history with several evolutionary paths. Understan
 
 OCPS chooses Vixie cron as its baseline (OCPS 1.0) because it represents the most common and widely understood cron syntax, which builds upon the minimal POSIX standard with essential, user-friendly features. By starting with a 100% Vixie-compatible foundation, OCPS ensures that the vast majority of existing cron patterns work as expected, providing a stable and familiar base upon which to incrementally add new, powerful features from other implementations.
 
------
-
-## 3\. The OCPS Principles
+## The OCPS Principles
 
 The core principles behind OCPS are **Incremental Introduction** and **Backward Compatibility**. OCPS is designed to be adopted in stages, ensuring that any pattern valid in a previous version remains valid and behaves identically in all subsequent versions. This guarantees that implementers can adopt the level of complexity they need, and users can rely on consistent behavior across any OCPS-compliant tool.
 
------
-
-## 4\. Repository Layout
+## Repository Layout
 
 This repository is structured to provide two views of the specification:
 
-  * **/increments**: This directory contains documents describing only the *new features* introduced in each version. These are useful for quickly seeing what has changed. Works in progress for future versions are also located here and named according to their state until being finalized (e.g., `OCPS-increment-1.5.md`).
+  * **/increments**: Documents describing only the *new features* introduced in each version. These are useful for quickly seeing what has changed. Works in progress for future versions are also located here.
 
-  * **/specifications**: This directory contains the *full, consolidated* specification for each version. These documents are the canonical reference for implementers. A new specification file is only published here once its corresponding increment has been finalized.
+  * **/specifications**: The *full, consolidated* specification for each version. These documents are the canonical reference for implementers. A new specification file is only published here once its corresponding increment has been finalized.
 
------
-
-## 5\. Increments and Full Specifications
-
-The official specification documents are linked below.
+## Versions and Specifications
 
 Progress for each iteration is tracked through [milestones](https://github.com/open-source-cron/ocps/milestones).
 
@@ -58,17 +48,13 @@ Progress for each iteration is tracked through [milestones](https://github.com/o
 | **1.1** | DRAFT | Pre-defined Schedules | [1.1 Increment](./increments/OCPS-increment-1.1.md) | N/A |
 | **1.0** | **FINAL** | The Baseline | N/A | **[OCPS 1.0](./specifications/OCPS-1.0.md)** |
 
------
-
-## 6\. Conformance & Implementations
+## Conformance & Implementations
 
 Each full specification document contains a "Conformance" section detailing the requirements for an implementation to claim compliance with that version.
 
 For a list of known libraries and their current conformance levels, please see the **[Implementation Conformance Matrix](./CONFORMANCE.md)**.
 
------
-
-## 7\. Contributing
+## Contributing
 
 This project is in its draft stages. Contributions, suggestions, and feedback are welcome. Please open an issue to start a discussion.
 
