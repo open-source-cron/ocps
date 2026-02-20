@@ -47,7 +47,7 @@ This table shows the percentage of the 17 libraries listed below that meet diffe
 | **Java Libraries** | **OCPS 1.0** | **OCPS 1.1** | **OCPS 1.2** | **OCPS 1.3** | **OCPS 1.4** | **Notes** |
 | :--- | :---: | :---: | :---: | :---: | :---: | :--- |
 | **Spring Framework (`@Scheduled`)** | 🟡 | ❌ | ✅ | ✅ | 🟡 | Supports seconds, `L`, `W`, `#`. Uses `AND` logic for date fields. `?` is a wildcard. No nicknames. [7] |
-| **Quartz** | 🟡 | ❌ | ✅ | ✅ | 🟡 | Original source for `L`, `W`, `#`. Does not allow combining dom ad dow, and but requires `?` to disambiguate date fields. No nicknames. [8][9] |
+| **Quartz** | 🟡 | ❌ | ✅ | ✅ | 🟡 | Original source for `L`, `W`, `#`. Does not allow combining dom and dow, but requires `?` to disambiguate date fields. No nicknames. [8][9] |
 
 ### .NET Libraries
 

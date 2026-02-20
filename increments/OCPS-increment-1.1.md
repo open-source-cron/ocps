@@ -5,7 +5,7 @@
 
 ## 1\. Introduction
 
-This document defines version 1.1 of the Open Cron Pattern Specification (OCPS). It is a backward-compatible superset of [OCPS 1.0](./OCPS-increment-1.0.md).
+This document defines version 1.1 of the Open Cron Pattern Specification (OCPS). It is a backward-compatible superset of [OCPS 1.0](../specifications/OCPS-1.0.md).
 
 This version introduces "nicknames" as human-readable aliases for common scheduling patterns.
 

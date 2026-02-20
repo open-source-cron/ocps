@@ -50,5 +50,5 @@ This version also introduces an optional seventh field at the end of the pattern
 
 * **Example Patterns:**
     * `* * * * * *`: Runs every second of every year. (Standard 6-field pattern)
-    * `0 15 10 * * ? 2025`: Runs at 10:15:00 AM on every day-of-week that is the specified day-of-month in the year 2025 only.
+    * `0 15 10 * * * 2025`: Runs at 10:15:00 AM every day in the year 2025 only.
     * `0 0 12 1 1 * 2025-2030`: Runs at 12:00:00 PM on January 1st every year from 2025 through 2030.
