@@ -88,7 +88,6 @@
     { "id": 7, "url": "https://productresources.collibra.com/docs/collibra/latest/Content/Cron/co_spring-cron.htm" },
     { "id": 8, "url": "https://www.quartz-scheduler.org/documentation/quartz-2.3.0/tutorials/crontrigger.html" },
     { "id": 9, "url": "https://docs.oracle.com/cd/E12058_01/doc/doc.1014/e12030/cron_expressions.htm" },
-    { "id": 10, "url": "https://indexoutofrange.com/Don't-do-it-now!-Part-6.-Hangfire-recurring-jobs/" },
     { "id": 11, "url": "https://github.com/HangfireIO/Cronos" },
     { "id": 12, "url": "https://crates.io/crates/croner/1.0.2" },
     { "id": 13, "url": "https://docs.rs/cron" },
