@@ -3,7 +3,7 @@
 **Status: DRAFT**
 **Date: 2025-07-03**
 
-## 1\. Introduction
+## 1. Introduction
 
 This document defines version 1.1 of the Open Cron Pattern Specification (OCPS). It is a backward-compatible superset of [OCPS 1.0](../specifications/OCPS-1.0.md).
 
@@ -11,7 +11,7 @@ This version introduces "nicknames" as human-readable aliases for common schedul
 
 -----
 
-## 2\. Design Rationale
+## 2. Design Rationale
 
 The primary goal for introducing predefined schedules in OCPS 1.1 is to **standardize existing de facto features**.
 
@@ -19,13 +19,13 @@ Predefined schedules have been a feature of Vixie cron and its derivatives for m
 
 -----
 
-## 3\. Conformance
+## 3. Conformance
 
 An implementation is "OCPS 1.1 Compliant" if it meets all OCPS 1.0 requirements and correctly implements the predefined schedules defined herein.
 
 -----
 
-## 4\. New Features in OCPS 1.1
+## 4. New Features in OCPS 1.1
 
 ### 4.1. Predefined Schedules ("Nicknames")
 

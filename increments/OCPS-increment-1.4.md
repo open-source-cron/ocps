@@ -3,7 +3,7 @@
 **Status: DRAFT**
 **Date: 2025-07-03**
 
-## 1\. Introduction
+## 1. Introduction
 
 This document defines version 1.4 of the Open Cron Pattern Specification (OCPS). It is a backward-compatible superset of [OCPS 1.3](./OCPS-increment-1.3.md).
 
@@ -11,7 +11,7 @@ This version does not introduce new scheduling capabilities but instead focuses 
 
 -----
 
-## 2\. Design Rationale
+## 2. Design Rationale
 
 The focus of this iteration is to enhance reliability by resolving critical ambiguities between major cron dialects. The most significant of these is the logical operator (AND/OR) used to combine the Day of Month and Day of Week fields when both are restricted. OCPS 1.4 codifies the default behavior as a logical OR (consistent with Vixie cron) and introduces the **`+`** modifier as a portable, pattern-specific mechanism to explicitly select AND logic.
 
@@ -19,13 +19,13 @@ Furthermore, this version defines the `?` character as formally non-portable, di
 
 -----
 
-## 3\. Conformance
+## 3. Conformance
 
 An implementation is "OCPS 1.4 Compliant" if it meets all OCPS 1.3 requirements and correctly implements the logical modes and character definitions herein.
 
 -----
 
-## 4\. New Features in OCPS 1.4
+## 4. New Features in OCPS 1.4
 
 ### 4.1. Logical Combination of Date Fields
 

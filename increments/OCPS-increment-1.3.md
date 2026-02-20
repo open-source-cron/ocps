@@ -3,7 +3,7 @@
 **Status: DRAFT**
 **Date: 2025-07-03**
 
-## 1\. Introduction
+## 1. Introduction
 
 This document defines version 1.3 of the Open Cron Pattern Specification (OCPS). It is a backward-compatible superset of [OCPS 1.2](./OCPS-increment-1.2.md).
 
@@ -11,7 +11,7 @@ This version introduces powerful modifiers for complex monthly scheduling scenar
 
 -----
 
-## 2\. Design Rationale
+## 2. Design Rationale
 
 This iteration introduces syntax to express complex, calendar-based scheduling constraints that are difficult or impossible to define using the baseline syntax. It adopts the `L` (last), `#` (nth), and `W` (closest weekday) modifiers, which are heavily inspired by their implementation in the Quartz scheduler.
 
@@ -19,13 +19,13 @@ Rather than defining a new, proprietary syntax, OCPS adopts these proven concept
 
 -----
 
-## 3\. Conformance
+## 3. Conformance
 
 An implementation is "OCPS 1.3 Compliant" if it meets all OCPS 1.2 requirements and correctly implements the special characters defined herein.
 
 -----
 
-## 4\. New Special Characters in OCPS 1.3
+## 4. New Special Characters in OCPS 1.3
 
 ### 4.1. `L` (Last) Modifier
 The `L` character can be used in the `Day of Month` and `Day of Week` fields.
