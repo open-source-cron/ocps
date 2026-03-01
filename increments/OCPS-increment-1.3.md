@@ -76,6 +76,8 @@ When the `W` modifier is used with a day number that does not exist in a particu
 
 To schedule on the last weekday of every month regardless of month length, combine `L` and `W` as `LW`:
 
+* **Token form (`LW`):** In the `Day of Month` field, `LW` is a single, reserved token that means "the last weekday of the month." It is not interpreted as `L` applied to a `W`-modified day number.
 * **Example:** `0 12 LW * *` triggers at noon on the last weekday of the month.
     * If the last day is a weekday, it triggers on that day.
     * If the last day is a weekend, it triggers on the preceding Friday.
+* **Invalid combinations:** Other `L`/`W` combinations in the `Day of Month` field (such as `1LW`, `L1W`, `LLW`, ranges involving `LW` like `L-LW`, or lists such as `LW,15W`) are INVALID and **MUST NOT** be accepted by compliant parsers. Only the bare `LW` token and numeric-`W` forms (e.g., `15W`) are valid.
