@@ -39,7 +39,7 @@ An OCPS 1.0 pattern MUST consist of five fields separated by whitespace. A compl
 | **Hour** | Yes | 0-23 |
 | **Day of Month** | Yes | 1-31 |
 | **Month** | Yes | 1-12 or JAN-DEC |
-| **Day of Week**| Yes | 0-7 or SUN-SAT |
+| **Day of Week** | Yes | 0-7 or SUN-SAT |
 
 * Month and Day of Week names MUST be treated as case-insensitive.
 * In the Day of Week field, `0` and `7` MUST both be treated as Sunday.
