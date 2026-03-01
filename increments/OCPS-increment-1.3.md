@@ -62,3 +62,22 @@ The `W` character can be used in the `Day of Month` field to find the closest we
     * If the 1st is a Saturday, it triggers on **Monday the 3rd**, as moving to the previous month is not allowed.
 
 * **Constraint:** The `W` character is a modifier for a single day and cannot be used with ranges or lists. For example, `1-15W` is an invalid pattern.
+
+#### 4.3.1. Behavior with Non-Existing Days
+
+When the `W` modifier is used with a day number that does not exist in a particular month (e.g., `31W` in February), the pattern **will not match any date in that month**. The job will simply not be scheduled to run during those months.
+
+* **Example:** `0 12 31W * *` triggers at noon on the nearest weekday to the 31st.
+    * In months with 31 days (Jan, Mar, May, Jul, Aug, Oct, Dec), it triggers on the closest weekday **within that month**:
+        * If the 31st is a weekday (Mon–Fri), it triggers on the 31st.
+        * If the 31st is a Saturday, it triggers on Friday the 30th.
+        * If the 31st is a Sunday, it **cannot** move to Monday the 1st (next month), so it triggers on Friday the 29th.
+    * In months with fewer days (Feb, Apr, Jun, Sep, Nov), the pattern does not match and the job does not run.
+
+To schedule on the last weekday of every month regardless of month length, combine `L` and `W` as `LW`:
+
+* **Token form (`LW`):** In the `Day of Month` field, `LW` is a single, reserved token that means "the last weekday of the month." It is not interpreted as `L` applied to a `W`-modified day number.
+* **Example:** `0 12 LW * *` triggers at noon on the last weekday of the month.
+    * If the last day is a weekday, it triggers on that day.
+    * If the last day is a weekend, it triggers on the preceding Friday.
+* **Invalid combinations:** Other `L`/`W` combinations in the `Day of Month` field (such as `1LW`, `L1W`, `LLW`, ranges involving `LW` like `L-LW`, or lists such as `LW,15W`) are INVALID and **MUST NOT** be accepted by compliant parsers. Only the bare `LW` token and numeric-`W` forms (e.g., `15W`) are valid.
