@@ -72,8 +72,12 @@ Establishing clear boundaries and calendar semantics is essential for predictabl
 
 * **Calendar System:** It is RECOMMENDED that implementations use a single, well-defined calendar system for all date calculations. The Proleptic Gregorian calendar is the preferred choice, as it applies Gregorian leap year rules consistently to dates both in the future and before its historical adoption.
 
-* **Supported Range:** The normative allowed range for the `Year` field is `1970-2099`, as defined in OCPS 1.2 Section 4.1. Implementations MUST reject year values outside this range as a parsing error.
-    * **Lower Bound (Year 1970):** This aligns with the Unix epoch and the established convention across all major cron implementations that support a year field (Quartz, AWS EventBridge, croniter, cron-utils, Salesforce Apex). The even starting value ensures that `*/2` produces even years, matching universal user expectations. Implementations that need to support dates before 1970 MAY extend the lower bound but MUST document the deviation and its effect on wildcard stepping.
-    * **Upper Bound (Year 2099):** This matches the most widely adopted upper bound (Quartz, Quartz.NET, croniter, cron-utils, Salesforce) and provides a practical window for future scheduling while acting as a safeguard against infinite loops when searching for occurrences of patterns that may never match. Implementations MAY extend the upper bound (e.g., to 2199 as AWS EventBridge does) but MUST document the extension.
+* **Supported Range:** The normative allowed range for the `Year` field is `1970-2199`, as defined in OCPS 1.2 Section 4.1. Implementations MUST reject year values outside their supported range as a parsing error.
+    * **Lower Bound (Year 1970):** This aligns with the Unix epoch and the established convention across all major cron implementations that support a year field (Quartz, AWS EventBridge, croniter, cron-utils, Salesforce Apex). The even starting value ensures that `*/2` produces even years, matching universal user expectations.
+    * **Upper Bound (Year 2199):** This encompasses the widest range found in major implementations (AWS EventBridge uses `1970-2199`) and provides a generous window for future scheduling while acting as a safeguard against infinite loops when searching for occurrences of patterns that may never match.
+    * **Extending the Range:** Implementations MAY support a wider year range than `1970-2199` (e.g., for historical date processing or far-future scheduling). Any such extension MUST satisfy all of the following:
+        1. The lower bound MUST be an even number. This ensures that `*/2` always yields even years by default, keeping stepping behavior predictable across implementations.
+        2. The extension MUST be documented, including the exact supported range.
+        3. The documentation MUST note the effect on wildcard stepping if the range differs from the standard `1970-2199`.
 
 * **Error Handling:** An attempt to find a scheduled occurrence outside the implementation's documented supported range SHOULD fail and return an out-of-range error.

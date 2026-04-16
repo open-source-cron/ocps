@@ -34,11 +34,13 @@ The following table defines the allowed values for the new fields introduced in 
 | Field | Required | Allowed Values |
 | :--- | :--- | :--- |
 | **Second** | No | 0-59 |
-| **Year** | No | 1970-2099 |
+| **Year** | No | 1970-2199 |
 
-The year range of `1970-2099` aligns with the established convention used by Quartz Scheduler, AWS EventBridge, croniter, cron-utils, Salesforce Apex, and other widely deployed implementations that support a year field. This ensures that OCPS-compliant implementations produce results consistent with existing user expectations.
+The year range of `1970-2199` encompasses the ranges used by all major implementations that support a year field: Quartz Scheduler and croniter use `1970-2099`, while AWS EventBridge uses `1970-2199`. Starting from `1970` aligns with the Unix epoch. The upper bound of `2199` provides a generous window for future scheduling while remaining practical for implementations.
 
-> **Note on Year Stepping:** Because the year field's allowed range starts at `1970` (an even number), a wildcard step such as `*/2` expands to `1970-2099/2`, yielding even years (1970, 1972, ..., 2024, 2026, 2028, ...). To match odd years, use an explicit start: `1971-2099/2` (1971, 1973, ..., 2025, 2027, 2029, ...). This is consistent with how stepping works in all major cron implementations that support a year field.
+> **Note on Year Stepping:** Because the year field's allowed range starts at `1970` (an even number), a wildcard step such as `*/2` expands to `1970-2199/2`, yielding even years (1970, 1972, ..., 2024, 2026, 2028, ...). To match odd years, use an explicit start: `1971-2199/2` (1971, 1973, ..., 2025, 2027, 2029, ...). This is consistent with how stepping works in all major cron implementations that support a year field.
+
+> **Rule for Extended Ranges:** Implementations that extend the year range beyond `1970-2199` MUST ensure the lower bound is an even number. This guarantees that `*/2` always produces even years by default, keeping stepping behavior predictable regardless of the implementation's specific range. For example, extending to `1960-2300` is valid (1960 is even), but `1969-2300` is not (1969 is odd and would cause `*/2` to yield odd years instead).
 
 ### 4.2. Optional Second-Level Precision
 
@@ -66,4 +68,4 @@ This version also introduces an optional seventh field at the end of the pattern
     * `0 15 10 * * * 2025`: Runs at 10:15:00 AM every day in the year 2025 only.
     * `0 0 12 1 1 * 2025-2030`: Runs at 12:00:00 PM on January 1st every year from 2025 through 2030.
     * `0 0 0 1 1 * */2`: Runs at midnight on January 1st of every even year (2024, 2026, 2028, ...).
-    * `0 0 0 1 1 * 1971-2099/2`: Runs at midnight on January 1st of every odd year (2025, 2027, 2029, ...).
+    * `0 0 0 1 1 * 1971-2199/2`: Runs at midnight on January 1st of every odd year (2025, 2027, 2029, ...).
