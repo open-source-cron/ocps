@@ -27,7 +27,18 @@ An implementation is "OCPS 1.2 Compliant" if it meets all OCPS 1.1 requirements 
 
 ## 4. New Features in OCPS 1.2
 
-### 4.1. Optional Second-Level Precision
+### 4.1. Field Values for New Fields
+
+The following table defines the allowed values for the new fields introduced in this version. All special characters and stepping rules defined in OCPS 1.0 Section 5 apply to these fields. In particular, the wildcard (`*`) expands to the full allowed range, and stepping starts from the lowest value of that range (see OCPS 1.0 Section 5.1).
+
+| Field | Required | Allowed Values |
+| :--- | :--- | :--- |
+| **Second** | No | 0-59 |
+| **Year** | No | 1-9999 |
+
+> **Note on Year Stepping:** Because the year field's allowed range starts at `1`, a wildcard step such as `*/2` expands to `1-9999/2`, yielding odd years (1, 3, 5, ..., 2025, 2027, 2029, ...). To match even years, use an explicit range: `2-9999/2` (2, 4, 6, ..., 2024, 2026, 2028, ...). This is consistent with how stepping works for other 1-based fields such as `month` and `day-of-month`.
+
+### 4.2. Optional Second-Level Precision
 
 OCPS 1.2 introduces an optional sixth field at the beginning of the pattern string to represent `seconds`.
 
@@ -37,7 +48,7 @@ OCPS 1.2 introduces an optional sixth field at the beginning of the pattern stri
     * If the `Second` field is omitted (i.e., a 5-field pattern is used), its value implicitly defaults to `0`. An OCPS 1.2 compliant parser MUST NOT fail when parsing a 5-field pattern.
     * Predefined schedules (e.g., `@daily`) are equivalent to their 5-field pattern with a `second` value of `0`.
 
-### 4.2. Optional Year-Level Precision
+### 4.3. Optional Year-Level Precision
 
 This version also introduces an optional seventh field at the end of the pattern string to represent the `year`.
 
@@ -46,9 +57,11 @@ This version also introduces an optional seventh field at the end of the pattern
     * The `Year` field can be used with a 6-part pattern that includes `seconds`.
     * If the `Year` field is present, the pattern will only match if the current year also matches the specified value.
     * If the `Year` field is omitted (i.e., a 5-field or 6-field pattern is used), its value implicitly defaults to `*` (every year). An OCPS 1.2 compliant parser MUST NOT fail when parsing a pattern without a `year` field.
-    * The allowed values for the `Year` field are individual years (e.g., `2025`), a range (e.g., `2025-2030`), a list (e.g., `2025,2027`), or a step value (e.g., `*/2`).
+    * The allowed values for the `Year` field are defined in Section 4.1. The field supports individual years (e.g., `2025`), ranges (e.g., `2025-2030`), lists (e.g., `2025,2027`), and step values (e.g., `*/2`).
 
 * **Example Patterns:**
     * `* * * * * *`: Runs every second of every year. (Standard 6-field pattern)
     * `0 15 10 * * * 2025`: Runs at 10:15:00 AM every day in the year 2025 only.
     * `0 0 12 1 1 * 2025-2030`: Runs at 12:00:00 PM on January 1st every year from 2025 through 2030.
+    * `0 0 0 1 1 * */2`: Runs at midnight on January 1st of every odd year (2025, 2027, 2029, ...).
+    * `0 0 0 1 1 * 2-9999/2`: Runs at midnight on January 1st of every even year (2026, 2028, 2030, ...).
