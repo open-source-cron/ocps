@@ -36,9 +36,9 @@ The following table defines the allowed values for the new fields introduced in 
 | **Second** | No | 0-59 |
 | **Year** | No | 1970-2199 |
 
-The year range of `1970-2199` encompasses the ranges used by all major implementations that support a year field: Quartz Scheduler and croniter use `1970-2099`, while AWS EventBridge uses `1970-2199`. Starting from `1970` aligns with the Unix epoch. The upper bound of `2199` provides a generous window for future scheduling while remaining practical for implementations.
+The year range starts at `1970` to align with the Unix epoch. The upper bound of `2199` provides a generous window for future scheduling while remaining practical for implementations.
 
-> **Note on Year Stepping:** Because the year field's allowed range starts at `1970` (an even number), a wildcard step such as `*/2` expands to `1970-2199/2`, yielding even years (1970, 1972, ..., 2024, 2026, 2028, ...). To match odd years, use an explicit start: `1971-2199/2` (1971, 1973, ..., 2025, 2027, 2029, ...). This is consistent with how stepping works in all major cron implementations that support a year field.
+> **Note on Year Stepping:** Because the year field's allowed range starts at `1970` (an even number), a wildcard step such as `*/2` expands to `1970-2199/2`, yielding even years (1970, 1972, ..., 2024, 2026, 2028, ...). To match odd years, use an explicit start: `1971-2199/2` (1971, 1973, ..., 2025, 2027, 2029, ...). This follows directly from the stepping rules defined in OCPS 1.0 Section 5.1.
 
 > **Rule for Extended Ranges:** Implementations that extend the year range beyond `1970-2199` MUST ensure the lower bound is an even number. This guarantees that `*/2` always produces even years by default, keeping stepping behavior predictable regardless of the implementation's specific range. For example, extending to `1960-2300` is valid (1960 is even), but `1969-2300` is not (1969 is odd and would cause `*/2` to yield odd years instead).
 
