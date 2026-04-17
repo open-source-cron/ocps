@@ -43,9 +43,9 @@ This version also introduces an optional seventh field at the end of the pattern
 
 * **7-Field Format:** `SECOND MINUTE HOUR DAY-OF-MONTH MONTH DAY-OF-WEEK YEAR`
 * **Behavior:**
-    * The `Year` field may be used either in a 7-field pattern together with `seconds`, or in a 6-field pattern that omits `seconds` (in which case `Second` implicitly defaults to `0`).
+    * The `Year` field may be used only in the 7-field pattern, together with the `seconds` field.
     * If the `Year` field is present, the pattern will only match if the current year also matches the specified value.
-    * If the `Year` field is omitted (i.e., a 5-field or 6-field pattern is used), its value implicitly defaults to `*` (every year). An OCPS 1.2 compliant parser MUST NOT fail when parsing a pattern without a `year` field.
+    * If the `Year` field is omitted (i.e., a 5-field or 6-field pattern is used), its value implicitly defaults to `*` (every year). In a 6-field pattern, the fields MUST be interpreted according to Section 4.1 as `SECOND MINUTE HOUR DAY-OF-MONTH MONTH DAY-OF-WEEK`. An OCPS 1.2 compliant parser MUST NOT fail when parsing a pattern without a `year` field.
     * The field supports individual years (e.g., `2025`), ranges (e.g., `2025-2030`), lists (e.g., `2025,2027`), and step values (e.g., `*/2`).
 
 > **Note on Year Stepping:** Because the year field's allowed range starts at `1970` (an even number), a wildcard step such as `*/2` expands to `1970-2199/2`, yielding even years (1970, 1972, ..., 2024, 2026, 2028, ...). To match odd years, use an explicit start: `1971-2199/2` (1971, 1973, ..., 2025, 2027, 2029, ...). This follows directly from the stepping rules defined in OCPS 1.0 Section 5.1.
