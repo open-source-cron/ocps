@@ -72,12 +72,14 @@ Establishing clear boundaries and calendar semantics is essential for predictabl
 
 * **Calendar System:** It is RECOMMENDED that implementations use a single, well-defined calendar system for all date calculations. The Proleptic Gregorian calendar is the preferred choice, as it applies Gregorian leap year rules consistently to dates both in the future and before its historical adoption.
 
-* **Supported Range:** The normative allowed range for the `Year` field is `1970-2199`, as defined in OCPS 1.2 Section 4.2. Implementations MUST reject year values outside their supported range as a parsing error.
-    * **Lower Bound (Year 1970):** This aligns with the Unix epoch. The even starting value ensures that `*/2` produces even years, matching universal user expectations.
+* **Supported Range:** The standard portable range for the `Year` field is `1970-2199`, as defined in OCPS 1.2 Section 4.2, and OCPS 1.4 compliant implementations MUST support at least this range. Implementations MUST reject year values outside their documented supported range as a parsing error.
+    * **Lower Bound (Year 1970):** This aligns with the Unix epoch. The even starting value ensures that `*/2` produces even years because wildcard stepping is evaluated relative to the lower bound of the supported range.
     * **Upper Bound (Year 2199):** This provides a generous window for future scheduling while acting as a safeguard against infinite loops when searching for occurrences of patterns that may never match.
     * **Extending the Range:** Implementations MAY support a wider year range than `1970-2199` (e.g., for historical date processing or far-future scheduling). Any such extension MUST satisfy all of the following:
-        1. The lower bound MUST be an even number. This ensures that `*/2` always yields even years by default, keeping stepping behavior predictable across implementations.
+        1. The lower bound MUST be an even number. This preserves the default parity of stepped expressions such as `*/2`.
         2. The extension MUST be documented, including the exact supported range.
-        3. The documentation MUST note the effect on wildcard stepping if the range differs from the standard `1970-2199`.
+        3. Parsing of explicit year values, ranges, lists, wildcards (`*`), and stepped expressions (for example `*/2` and `2000-2100/5`) MUST be performed relative to the implementation's documented supported range.
+        4. For `*` and any expression derived from `*` using stepping, expansion MUST begin at the documented lower bound of the supported range. Therefore, if an implementation extends the range, the set of matching years for such expressions is implementation-defined by that documented range and is not portable beyond the standard `1970-2199` range.
+        5. The documentation MUST note the effect of the implementation's supported range on wildcard and stepping expansion when that range differs from the standard portable range.
 
 * **Error Handling:** An attempt to find a scheduled occurrence outside the implementation's documented supported range SHOULD fail and return an out-of-range error.

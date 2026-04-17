@@ -39,18 +39,18 @@ OCPS 1.2 introduces an optional sixth field at the beginning of the pattern stri
 
 ### 4.2. Optional Year-Level Precision
 
-This version also introduces an optional seventh field at the end of the pattern string to represent the `year`. The allowed values are `1970-2199`. The range starts at `1970` to align with the Unix epoch. The upper bound of `2199` provides a generous window for future scheduling while remaining practical for implementations.
+This version also introduces an optional seventh field at the end of the pattern string to represent the `year`. The standard portable range is `1970-2199`. The range starts at `1970` to align with the Unix epoch. The upper bound of `2199` provides a generous window for future scheduling while remaining practical for implementations.
 
 * **7-Field Format:** `SECOND MINUTE HOUR DAY-OF-MONTH MONTH DAY-OF-WEEK YEAR`
 * **Behavior:**
-    * The `Year` field can be used with a 6-part pattern that includes `seconds`.
+    * The `Year` field may be used either in a 7-field pattern together with `seconds`, or in a 6-field pattern that omits `seconds` (in which case `Second` implicitly defaults to `0`).
     * If the `Year` field is present, the pattern will only match if the current year also matches the specified value.
     * If the `Year` field is omitted (i.e., a 5-field or 6-field pattern is used), its value implicitly defaults to `*` (every year). An OCPS 1.2 compliant parser MUST NOT fail when parsing a pattern without a `year` field.
     * The field supports individual years (e.g., `2025`), ranges (e.g., `2025-2030`), lists (e.g., `2025,2027`), and step values (e.g., `*/2`).
 
 > **Note on Year Stepping:** Because the year field's allowed range starts at `1970` (an even number), a wildcard step such as `*/2` expands to `1970-2199/2`, yielding even years (1970, 1972, ..., 2024, 2026, 2028, ...). To match odd years, use an explicit start: `1971-2199/2` (1971, 1973, ..., 2025, 2027, 2029, ...). This follows directly from the stepping rules defined in OCPS 1.0 Section 5.1.
 
-> **Rule for Extended Ranges:** Implementations that extend the year range beyond `1970-2199` MUST ensure the lower bound is an even number. This guarantees that `*/2` always produces even years by default, keeping stepping behavior predictable regardless of the implementation's specific range. For example, extending to `1960-2300` is valid (1960 is even), but `1969-2300` is not (1969 is odd and would cause `*/2` to yield odd years instead).
+> **Rule for Extended Ranges:** Implementations MAY extend the year range beyond `1970-2199` (e.g., for historical date processing or far-future scheduling). Such extensions are non-standard but permitted for compliant implementations. Implementations that extend the range MUST ensure the lower bound is an even number. This guarantees that `*/2` always produces even years by default, keeping stepping behavior predictable regardless of the implementation's specific range. For example, extending to `1960-2300` is valid (1960 is even), but `1969-2300` is not (1969 is odd and would cause `*/2` to yield odd years instead).
 
 * **Example Patterns:**
     * `* * * * * *`: Runs every second of every year. (Standard 6-field pattern)
@@ -63,7 +63,7 @@ This version also introduces an optional seventh field at the end of the pattern
 
 All special characters and stepping rules defined in OCPS 1.0 Section 5 apply to these fields.
 
-| Field | Required | Allowed Values |
+| Field | Required | Standard Portable Range |
 | :--- | :--- | :--- |
 | **Second** | No | 0-59 |
 | **Year** | No | 1970-2199 |
