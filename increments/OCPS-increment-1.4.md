@@ -72,7 +72,7 @@ Establishing clear boundaries and calendar semantics is essential for predictabl
 
 * **Calendar System:** It is RECOMMENDED that implementations use a single, well-defined calendar system for all date calculations. The Proleptic Gregorian calendar is the preferred choice, as it applies Gregorian leap year rules consistently to dates both in the future and before its historical adoption.
 
-* **Supported Range:** The normative allowed range for the `Year` field is `1970-2199`, as defined in OCPS 1.2 Section 4.1. Implementations MUST reject year values outside their supported range as a parsing error.
+* **Supported Range:** The normative allowed range for the `Year` field is `1970-2199`, as defined in OCPS 1.2 Section 4.2. Implementations MUST reject year values outside their supported range as a parsing error.
     * **Lower Bound (Year 1970):** This aligns with the Unix epoch. The even starting value ensures that `*/2` produces even years, matching universal user expectations.
     * **Upper Bound (Year 2199):** This provides a generous window for future scheduling while acting as a safeguard against infinite loops when searching for occurrences of patterns that may never match.
     * **Extending the Range:** Implementations MAY support a wider year range than `1970-2199` (e.g., for historical date processing or far-future scheduling). Any such extension MUST satisfy all of the following:
