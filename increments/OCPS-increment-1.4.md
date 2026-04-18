@@ -80,4 +80,4 @@ Establishing clear boundaries and calendar semantics is essential for predictabl
         4. For `*` and any expression derived from `*` using stepping, expansion MUST begin at the documented lower bound of the supported range. Therefore, if an implementation extends the range, the set of matching years for such expressions is implementation-defined by that documented range and is not portable beyond the standard `1970-2199` range.
         5. The documentation MUST note the effect of the implementation's supported range on wildcard and stepping expansion when that range differs from the standard portable range.
 
-* **Error Handling:** An attempt to find a scheduled occurrence outside the implementation's documented supported range SHOULD fail and return an out-of-range error.
+* **Error Handling:** An attempt to find a scheduled occurrence outside the implementation's documented supported range SHOULD fail with a runtime error or otherwise indicate that no valid run time exists within that range.
