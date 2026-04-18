@@ -29,7 +29,7 @@ An implementation is "OCPS 1.2 Compliant" if it meets all OCPS 1.1 requirements 
 
 ### 4.1. Optional Second-Level Precision
 
-OCPS 1.2 introduces an optional sixth field at the beginning of the pattern string to represent `seconds`. The allowed values are `0-59`.
+OCPS 1.2 introduces an optional sixth field at the beginning of the pattern string to represent `seconds`. The standard portable numeric range is `0-59`, and the field supports the expressions defined in OCPS 1.0 Section 5.
 
 * **6-Field Format:** `SECOND MINUTE HOUR DAY-OF-MONTH MONTH DAY-OF-WEEK`
 * **Behavior:**
