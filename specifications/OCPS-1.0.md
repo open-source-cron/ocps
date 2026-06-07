@@ -2,7 +2,7 @@
 
 **Status:** FINAL  
 **Revision:** 2  
-**Date:** 2025-11-21    
+**Date:** 2026-06-07    
 
 ## 1. Introduction
 
@@ -142,5 +142,5 @@ A compliant parser or scheduler MUST interpret the pattern against the implement
 
 | Revision | Date | Author(s) | Description of Changes |
 | :--- | :--- | :--- | :--- |
-| 2 | 2025-11-21 | The OCPS Authors | Clarified step notation syntax requirements: step operator (`/`) must be preceded by either wildcard (`*`) or range (`A-B`). Added explicit parsing error for invalid syntax like `/30`. |
+| 2 | 2026-06-07 | The OCPS Authors | Clarified step notation syntax requirements: step operator (`/`) must be preceded by either wildcard (`*`) or range (`A-B`). Added explicit parsing error for invalid syntax like `/30`. |
 | 1 | 2025-10-28 | The OCPS Authors | Initial publication of the 1.0 specification. |
