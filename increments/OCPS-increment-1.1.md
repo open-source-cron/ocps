@@ -29,7 +29,7 @@ An implementation is "OCPS 1.1 Compliant" if it meets all OCPS 1.0 requirements 
 
 ### 4.1. Predefined Schedules ("Nicknames")
 
-OCPS 1.1 adds support for case-insensitive nicknames as aliases for common patterns. An implementation MUST recognize the following strings, which MUST NOT be combined with a 5-field expression:
+OCPS 1.1 adds support for nicknames as aliases for common patterns. Nicknames MUST be treated as case-sensitive. An implementation MUST recognize the following strings, which MUST NOT be combined with a 5-field expression:
 
 | Nickname | Equivalent 5-Field Pattern | Description |
 | :--- | :--- | :--- |
