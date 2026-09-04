@@ -105,7 +105,7 @@ In OCPS 1.0, the special characters are combined within a single field to create
 ### 6.1. Logical Combination of Day of Month and Day of Week
 When both the `Day of Month` and `Day of Week` fields are restricted, a match occurs if **either** field matches the current date. This is a logical `OR`.
 
-For this rule, a field is "restricted" only when its resulting set is not the field's full possible range. Therefore, expressions equivalent to the full range (including wildcard-containing lists such as `*,1`) are treated as unrestricted.
+For this rule, a field is treated as unrestricted only when its first list sub-expression is an unrestricted wildcard (`*`). Any other form is treated as restricted for this purpose, even if it evaluates to the full field range (e.g., `1-31` in the day-of-month field). This preserves Vixie-compatible day-field behavior while still allowing `*` inside lists (e.g., `*,1` is unrestricted).
 
 * **Example:** The pattern `0 12 1 * MON` will trigger at noon on the first day of every month, AND at noon on every Monday.
 
@@ -144,6 +144,6 @@ A compliant parser or scheduler MUST interpret the pattern against the implement
 
 | Revision | Date | Author(s) | Description of Changes |
 | :--- | :--- | :--- | :--- |
-| 3 | 2026-09-04 | The OCPS Authors | Clarified list expressions containing wildcard sub-expressions: unrestricted `*` remains valid inside a list and is equivalent to the full field range, but parsers MUST still validate every list sub-expression and reject invalid trailing entries such as `*,*,61`. |
+| 3 | 2026-09-04 | The OCPS Authors | Clarified list expressions containing wildcard sub-expressions: unrestricted `*` remains valid inside a list and is equivalent to the full field range, parsers MUST still validate every list sub-expression and reject invalid trailing entries such as `*,*,61`, and day-field OR semantics remain Vixie-compatible by treating only a leading unrestricted wildcard (`*`) as unrestricted for Section 6.1. |
 | 2 | 2026-06-07 | The OCPS Authors | Clarified step notation syntax requirements: step operator (`/`) must be preceded by either wildcard (`*`) or range (`A-B`). Added explicit parsing error for invalid syntax like `/30`. |
 | 1 | 2025-10-28 | The OCPS Authors | Initial publication of the 1.0 specification. |
