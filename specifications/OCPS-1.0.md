@@ -1,7 +1,7 @@
 # OCPS 1.0: The Baseline
 
-**Status:** FINAL<br>
-**Revision:** 3<br>
+**Status:** FINAL  
+**Revision:** 3  
 **Date:** 2026-09-04
 
 ## 1. Introduction
