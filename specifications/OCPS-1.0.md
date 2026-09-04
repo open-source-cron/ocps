@@ -103,7 +103,9 @@ In OCPS 1.0, the special characters are combined within a single field to create
 ## 6. Operational Semantics
 
 ### 6.1. Logical Combination of Day of Month and Day of Week
-When both the `Day of Month` and `Day of Week` fields are restricted (i.e., not `*`), a match occurs if **either** field matches the current date. This is a logical `OR`.
+When both the `Day of Month` and `Day of Week` fields are restricted, a match occurs if **either** field matches the current date. This is a logical `OR`.
+
+For this rule, a field is "restricted" only when its resulting set is not the field's full possible range. Therefore, expressions equivalent to the full range (including wildcard-containing lists such as `*,1`) are treated as unrestricted.
 
 * **Example:** The pattern `0 12 1 * MON` will trigger at noon on the first day of every month, AND at noon on every Monday.
 
