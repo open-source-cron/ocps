@@ -105,7 +105,7 @@ In OCPS 1.0, the special characters are combined within a single field to create
 ### 6.1. Logical Combination of Day of Month and Day of Week
 When both the `Day of Month` and `Day of Week` fields are restricted, a match occurs if **either** field matches the current date. This is a logical `OR`.
 
-For this rule, a field is treated as unrestricted only when its first list sub-expression is an unrestricted wildcard (`*`). Any other form is treated as restricted for this purpose, even if it evaluates to the full field range (e.g., `1-31` in the day-of-month field). This preserves Vixie-compatible day-field behavior while still allowing `*` inside lists (e.g., `*,1` is unrestricted).
+For this rule, a field is unrestricted only when its first list sub-expression is `*`. Any other form is restricted, even if it evaluates to the full field range (e.g., `1-31` in the day-of-month field). This preserves Vixie-compatible day-field behavior while still allowing `*` inside lists (e.g., `*,1` is unrestricted).
 
 * **Example:** The pattern `0 12 1 * MON` will trigger at noon on the first day of every month, AND at noon on every Monday.
 
