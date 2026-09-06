@@ -95,7 +95,7 @@ The following cases are non-exhaustive but provide portable checks for the OCPS 
 
 Additional parser and optional `?` checks:
 
-* `0 12 +1 * MON` MUST be rejected because `+` is only valid as the first character of the `Day of Week` field.
+* `0 12 +1 * MON` MUST be rejected because `+` is not valid in the `Day of Month` field.
 * If an implementation supports `?`, `0 12 1 * ?` MUST match exactly the same datetimes as `0 12 1 * *`.
 * If an implementation supports `?`, `0 12 ? * MON` MUST match exactly the same datetimes as `0 12 * * MON`.
 * If an implementation supports `?`, `? 12 * * *` MUST be rejected because `?` is only meaningful in the `Day of Month` and `Day of Week` fields.
