@@ -66,4 +66,4 @@ Additional parser and equivalence checks:
 * `@daily` MUST match exactly the same datetimes as `0 0 * * *`.
 * `@Daily` MUST be rejected because nicknames are case-sensitive.
 * `@daily 0 0 * * *` MUST be rejected because a nickname cannot be combined with a field expression.
-* `@reboot` MUST be accepted during parsing. Its execution should be tested against a startup event rather than a datetime.
+* `@reboot` MUST be accepted during parsing. Runtime conformance MUST be evaluated against a startup event rather than a datetime, and an implementation without such an event MAY reject it at runtime with a clear error.
