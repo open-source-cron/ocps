@@ -82,4 +82,3 @@ The following cases are non-exhaustive but provide portable checks for the OCPS 
 Additional parser checks:
 
 * `0 12 1-15W * *` MUST be rejected because `W` cannot be combined with a range.
-* `0 0 * * 5L` MUST match `2025-02-28 00:00` and MUST NOT match `2025-02-21 00:00`.

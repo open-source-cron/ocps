@@ -88,6 +88,8 @@ Establishing clear boundaries and calendar semantics is essential for predictabl
 
 The following cases are non-exhaustive but provide portable checks for the OCPS 1.4 additions. Each datetime below is expressed as a local wall-clock time in `YYYY-MM-DD HH:mm` form.
 
+For the examples below, `2025-09-01` is a Monday.
+
 | Purpose | Pattern | MUST match | MUST NOT match |
 | :--- | :--- | :--- | :--- |
 | Default restricted day-field behavior remains logical OR | `0 12 1 * MON` | `2025-10-01 12:00`, `2025-10-06 12:00` | `2025-10-07 12:00` |
