@@ -162,6 +162,8 @@ The following cases are non-exhaustive but provide portable checks for OCPS 1.0 
 
 Additional distinction for Section 6.1:
 
+Only a literal leading `*` makes the `Day of Month` field unrestricted for this rule. A full-range expression such as `1-31` remains restricted, even though it covers every valid day of the month.
+
 * `0 12 * * MON` MUST NOT match `2025-10-07 12:00`.
 * `0 12 1-31 * MON` MUST match `2025-10-07 12:00`.
 
