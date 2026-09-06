@@ -84,4 +84,4 @@ The following cases are non-exhaustive but provide portable checks for the OCPS 
 Additional parser checks:
 
 * A compliant implementation MUST accept 5-field, 6-field, and 7-field patterns.
-* `0 0 0 1 1 * 1969` MUST be rejected unless the implementation explicitly documents a wider supported year range.
+* `0 0 0 1 1 * 1969` is non-portable and MUST only be accepted by implementations that explicitly document a wider supported year range.
