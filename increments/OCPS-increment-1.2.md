@@ -84,5 +84,5 @@ The following cases are non-exhaustive but provide portable checks for the OCPS 
 Additional parser checks:
 
 * A compliant implementation MUST accept 5-field, 6-field, and 7-field patterns.
-* `15 10 * * * 2025` MUST be rejected because a 6-field pattern is interpreted as `SECOND MINUTE HOUR DAY-OF-MONTH MONTH DAY-OF-WEEK`, not as a pattern with a `year` field.
+* `15 10 * * * 2025` MUST be rejected because a 6-field pattern is interpreted as `SECOND MINUTE HOUR DAY-OF-MONTH MONTH DAY-OF-WEEK`, so `2025` is parsed as the day-of-week field and is out of range.
 * `0 0 0 1 1 * 1969` MUST be rejected unless the implementation explicitly documents a wider supported year range.
