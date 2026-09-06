@@ -46,3 +46,24 @@ The `@reboot` nickname is a special case, as it is not time-based but event-base
 
   * An OCPS 1.1 compliant parser **MUST** recognize `@reboot` as a valid pattern.
   * If an implementation's execution environment does not support a "startup" or "reboot" event (for example, a browser or a serverless environment), the implementation **MAY** reject the pattern at runtime. If rejected, it **SHOULD** provide a clear error message stating that `@reboot` is unsupported in the current context. It **MUST NOT** be treated as a syntax error during parsing.
+
+-----
+
+## Appendix A: Conformance Test Cases
+
+The following cases are non-exhaustive but provide portable checks for the OCPS 1.1 additions. Each datetime below is expressed as a local wall-clock time in `YYYY-MM-DD HH:mm` form.
+
+| Purpose | Pattern | MUST match | MUST NOT match |
+| :--- | :--- | :--- | :--- |
+| Yearly nickname | `@yearly` | `2026-01-01 00:00` | `2026-01-02 00:00` |
+| Monthly nickname | `@monthly` | `2026-02-01 00:00` | `2026-02-02 00:00` |
+| Weekly nickname | `@weekly` | `2025-09-07 00:00` | `2025-09-08 00:00` |
+| Daily nickname | `@daily` | `2025-10-07 00:00` | `2025-10-07 00:01` |
+| Hourly nickname | `@hourly` | `2025-10-07 10:00` | `2025-10-07 10:01` |
+
+Additional parser and equivalence checks:
+
+* `@daily` MUST match exactly the same datetimes as `0 0 * * *`.
+* `@Daily` MUST be rejected because nicknames are case-sensitive.
+* `@daily 0 0 * * *` MUST be rejected because a nickname cannot be combined with a field expression.
+* `@reboot` MUST be accepted during parsing. Its execution should be tested against a startup event rather than a datetime.

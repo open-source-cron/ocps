@@ -64,3 +64,22 @@ The `W` character can be used in the `Day of Month` field to find the closest we
     * If the 1st is a Saturday, it triggers on **Monday the 3rd**, as moving to the previous month is not allowed.
 
 * **Constraint:** The `W` character is a modifier for a single day and cannot be used with ranges or lists. For example, `1-15W` is an invalid pattern.
+
+-----
+
+## Appendix A: Conformance Test Cases
+
+The following cases are non-exhaustive but provide portable checks for the OCPS 1.3 additions. Each datetime below is expressed as a local wall-clock time in `YYYY-MM-DD HH:mm` form.
+
+| Purpose | Pattern | MUST match | MUST NOT match |
+| :--- | :--- | :--- | :--- |
+| Last day of month | `0 0 L * *` | `2025-02-28 00:00` | `2025-02-27 00:00` |
+| Last weekday of month | `0 0 * * FRI#L` | `2025-02-28 00:00` | `2025-02-21 00:00` |
+| Nth weekday of month | `0 0 * * 2#3` | `2025-06-17 00:00` | `2025-06-10 00:00` |
+| Closest weekday within the month | `0 12 15W * *` | `2025-06-16 12:00` | `2025-06-15 12:00` |
+| `W` MUST NOT cross a month boundary | `0 12 1W * *` | `2025-02-03 12:00` | `2025-01-31 12:00` |
+
+Additional parser checks:
+
+* `0 12 1-15W * *` MUST be rejected because `W` cannot be combined with a range.
+* `0 0 * * 5L` and `0 0 * * FRI#L` SHOULD be verified to match the same set of datetimes.
