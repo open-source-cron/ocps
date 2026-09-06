@@ -75,7 +75,7 @@ The following cases are non-exhaustive but provide portable checks for the OCPS 
 | :--- | :--- | :--- | :--- |
 | Last day of month | `0 0 L * *` | `2025-02-28 00:00` | `2025-02-27 00:00` |
 | Last weekday of month | `0 0 * * FRI#L` | `2025-02-28 00:00` | `2025-02-21 00:00` |
-| Nth weekday of month | `0 0 * * 2#3` | `2025-06-17 00:00` | `2025-06-10 00:00` |
+| Nth weekday of month | `0 0 * * TUE#3` | `2025-06-17 00:00` | `2025-06-10 00:00` |
 | Closest weekday within the month | `0 12 15W * *` | `2025-06-16 12:00` | `2025-06-15 12:00` |
 | `W` MUST NOT cross a month boundary | `0 12 1W * *` | `2025-02-03 12:00` | `2025-01-31 12:00` |
 
