@@ -98,6 +98,6 @@ For the examples below, `2025-09-01` is a Monday.
 Additional parser and optional `?` checks:
 
 * `0 12 +1 * MON` MUST be rejected because `+` is not valid in the `Day of Month` field.
-* If an implementation supports `?`, `0 12 1 * ?` MUST match `2025-10-01 12:00` and `2025-11-01 12:00`, and MUST NOT match `2025-10-06 12:00`.
-* If an implementation supports `?`, `0 12 ? * MON` MUST match `2025-10-06 12:00` and MUST NOT match `2025-10-07 12:00`.
+* For `0 12 1 * ?`, a compliant implementation MUST either reject the pattern during parsing as unsupported non-portable syntax, or, if it supports `?`, match `2025-10-01 12:00` and `2025-11-01 12:00`, and MUST NOT match `2025-10-06 12:00`.
+* For `0 12 ? * MON`, a compliant implementation MUST either reject the pattern during parsing as unsupported non-portable syntax, or, if it supports `?`, match `2025-10-06 12:00` and MUST NOT match `2025-10-07 12:00`.
 * If an implementation supports `?`, `? 12 * * *` MUST be rejected because `?` is only meaningful in the `Day of Month` and `Day of Week` fields.
