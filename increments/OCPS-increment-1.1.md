@@ -57,7 +57,7 @@ The following cases are non-exhaustive but provide portable checks for the OCPS 
 | :--- | :--- | :--- | :--- |
 | Yearly nickname | `@yearly` | `2026-01-01 00:00` | `2026-01-02 00:00` |
 | Monthly nickname | `@monthly` | `2026-02-01 00:00` | `2026-02-02 00:00` |
-| Weekly nickname | `@weekly` | `2025-09-07 00:00` | `2025-09-08 00:00` |
+| Weekly nickname | `@weekly` | `2025-10-05 00:00` | `2025-10-06 00:00` |
 | Daily nickname | `@daily` | `2025-10-07 00:00` | `2025-10-07 00:01` |
 | Hourly nickname | `@hourly` | `2025-10-07 10:00` | `2025-10-07 10:01` |
 

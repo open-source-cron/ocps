@@ -92,8 +92,8 @@ For the examples below, `2025-09-01` is a Monday.
 
 | Purpose | Pattern | MUST match | MUST NOT match |
 | :--- | :--- | :--- | :--- |
-| Default restricted day-field behavior remains logical OR | `0 12 1 * MON` | `2025-10-01 12:00`, `2025-10-06 12:00` | `2025-10-07 12:00` |
-| `+` requires logical AND | `0 12 1 * +MON` | `2025-09-01 12:00` | `2025-10-01 12:00`, `2025-10-06 12:00` |
+| Default restricted day-field behavior remains logical OR | `0 12 1 * MON` | `2025-09-01 12:00`, `2025-09-08 12:00` | `2025-09-02 12:00` |
+| `+` requires logical AND | `0 12 1 * +MON` | `2025-09-01 12:00` | `2025-09-02 12:00`, `2025-09-08 12:00` |
 
 Additional parser and optional `?` checks:
 
