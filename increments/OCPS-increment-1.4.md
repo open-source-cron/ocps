@@ -97,5 +97,5 @@ For the examples below, `2025-09-01` is a Monday.
 
 Additional parser checks:
 
-* `0 12 +1 * MON` MUST be rejected because `+` is not valid in the `Day of Month` field.
+* `0 12 +1 * MON` MUST be rejected because `+` MUST prefix the `Day of Week` field expression, not the `Day of Month` field.
 * `? 12 * * *` MUST be rejected because `?` is only meaningful in the `Day of Month` and `Day of Week` fields.
