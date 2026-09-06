@@ -162,8 +162,8 @@ The following cases are non-exhaustive but provide portable checks for OCPS 1.0 
 
 Additional distinction for Section 6.1:
 
-* `0 12 * * MON` MUST NOT match `2025-10-07 12:00`.
-* `0 12 1-31 * MON` MUST match `2025-10-07 12:00`.
+* `0 12 * * MON` MUST match `2025-10-06 12:00` and MUST NOT match `2025-10-07 12:00`.
+* `0 12 1-31 * MON` MUST match both `2025-10-06 12:00` and `2025-10-07 12:00`.
 
 Parsing-only checks:
 
