@@ -52,6 +52,8 @@ Progress for each iteration is tracked through [milestones](https://github.com/o
 
 Each full specification document contains a "Conformance" section detailing the requirements for an implementation to claim compliance with that version.
 
+For concrete test vectors that can be used to validate version-specific behavior, see **[OCPS Conformance Test Vectors](./CONFORMANCE-TESTS.md)**.
+
 For a list of known libraries and their current conformance levels, please see the **[Implementation Conformance Matrix](./CONFORMANCE.md)**.
 
 ## Contributing

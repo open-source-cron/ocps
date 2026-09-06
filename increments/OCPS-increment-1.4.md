@@ -81,21 +81,3 @@ Establishing clear boundaries and calendar semantics is essential for predictabl
         5. The documentation MUST note the effect of the implementation's supported range on wildcard and stepping expansion when that range differs from the standard portable range.
 
 * **Error Handling:** An attempt to find a scheduled occurrence outside the implementation's documented supported range SHOULD fail with a runtime error or otherwise indicate that no valid run time exists within that range.
-
------
-
-## Appendix A: Conformance Test Cases
-
-The following cases are non-exhaustive but provide portable checks for the OCPS 1.4 additions. Each datetime below is expressed as a local wall-clock time in `YYYY-MM-DD HH:mm` form.
-
-For the examples below, `2025-09-01` is a Monday and `2025-10-01` is a Wednesday.
-
-| Purpose | Pattern | MUST match | MUST NOT match |
-| :--- | :--- | :--- | :--- |
-| Default restricted day-field behavior remains logical OR | `0 12 1 * MON` | `2025-09-01 12:00`, `2025-09-08 12:00`, `2025-10-01 12:00` | `2025-10-07 12:00` |
-| `+` requires logical AND | `0 12 1 * +MON` | `2025-09-01 12:00` | `2025-09-08 12:00`, `2025-10-01 12:00` |
-
-Additional parser checks:
-
-* `0 12 +1 * MON` MUST be rejected because `+` MUST prefix the `Day of Week` field expression, not the `Day of Month` field.
-* `? 12 * * *` MUST be rejected because `?` is only meaningful in the `Day of Month` and `Day of Week` fields.

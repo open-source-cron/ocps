@@ -147,29 +147,3 @@ A compliant parser or scheduler MUST interpret the pattern against the implement
 | 3 | 2026-09-04 | The OCPS Authors | Clarified list expressions containing wildcard sub-expressions: unrestricted `*` remains valid inside a list and is equivalent to the full field range, parsers MUST still validate every list sub-expression and reject invalid trailing entries such as `*,*,61`, and day-field OR semantics remain Vixie-compatible by treating only a leading unrestricted wildcard (`*`) as unrestricted for Section 6.1. |
 | 2 | 2026-06-07 | The OCPS Authors | Clarified step notation syntax requirements: step operator (`/`) must be preceded by either wildcard (`*`) or range (`A-B`). Added explicit parsing error for invalid syntax like `/30`. |
 | 1 | 2025-10-28 | The OCPS Authors | Initial publication of the 1.0 specification. |
-
----
-## Appendix B: Conformance Test Cases
-
-The following cases are non-exhaustive but provide portable checks for OCPS 1.0 behavior. Each datetime below is expressed as a local wall-clock time in `YYYY-MM-DD HH:mm` form.
-
-| Purpose | Pattern | MUST match | MUST NOT match |
-| :--- | :--- | :--- | :--- |
-| Basic 5-field matching | `15 10 * * *` | `2025-03-10 10:15` | `2025-03-10 10:14` |
-| Case-insensitive month and weekday names | `30 8 * jan Mon` | `2025-01-06 08:30` | `2025-02-03 08:30` |
-| Step evaluation over an explicit range | `5-59/15 9 * * *` | `2025-03-10 09:05`, `2025-03-10 09:20`, `2025-03-10 09:35`, `2025-03-10 09:50` | `2025-03-10 09:15` |
-| Restricted day-of-month and day-of-week use logical OR | `0 12 1 * MON` | `2025-10-01 12:00`, `2025-10-06 12:00` | `2025-10-07 12:00` |
-
-Additional distinction for Section 6.1:
-
-Only a literal leading `*` makes the `Day of Month` field unrestricted for this rule. A full-range expression such as `1-31` remains restricted, even though it covers every valid day of the month.
-
-* `0 12 * * MON` MUST NOT match `2025-10-07 12:00`.
-* `0 12 1-31 * MON` MUST match `2025-10-07 12:00`.
-
-Parsing-only checks:
-
-* `60 0 * * *` MUST be rejected as a parsing error.
-* `0 0 10-5 * *` MUST be rejected as a parsing error.
-* `0 0 /30 * *` MUST be rejected as a parsing error.
-* `* * 31 2 *` MUST be accepted syntactically, even though no valid run time exists.

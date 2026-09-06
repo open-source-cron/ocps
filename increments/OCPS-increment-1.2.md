@@ -67,21 +67,3 @@ All special characters and stepping rules defined in OCPS 1.0 Section 5 apply to
 | :--- | :--- | :--- |
 | **Second** | No | 0-59 |
 | **Year** | No | 1970-2199 |
-
----
-
-## Appendix A: Conformance Test Cases
-
-The following cases are non-exhaustive but provide portable checks for the OCPS 1.2 additions. Each datetime below is expressed as a local wall-clock time in `YYYY-MM-DD HH:mm:ss` form.
-
-| Purpose | Pattern | MUST match | MUST NOT match |
-| :--- | :--- | :--- | :--- |
-| Five-field patterns still default seconds to `0` | `15 10 * * *` | `2025-03-10 10:15:00` | `2025-03-10 10:15:30` |
-| Six-field patterns match explicit seconds | `30 15 10 * * *` | `2025-03-10 10:15:30` | `2025-03-10 10:15:29` |
-| Seven-field patterns constrain the year | `0 15 10 * * * 2025` | `2025-03-10 10:15:00` | `2026-03-10 10:15:00` |
-| Stepping over an explicit range beginning at the portable lower bound | `0 0 0 1 1 * 1970-2199/2` | `2026-01-01 00:00:00` | `2025-01-01 00:00:00` |
-
-Additional parser checks:
-
-* A compliant implementation MUST accept 5-field, 6-field, and 7-field patterns.
-* `0 0 0 1 1 * 1969` is non-portable and MUST only be accepted by implementations that explicitly document a wider supported year range.
