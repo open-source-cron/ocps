@@ -79,7 +79,7 @@ The following cases are non-exhaustive but provide portable checks for the OCPS 
 | Five-field patterns still default seconds to `0` | `15 10 * * *` | `2025-03-10 10:15:00` | `2025-03-10 10:15:30` |
 | Six-field patterns match explicit seconds | `30 15 10 * * *` | `2025-03-10 10:15:30` | `2025-03-10 10:15:29` |
 | Seven-field patterns constrain the year | `0 15 10 * * * 2025` | `2025-03-10 10:15:00` | `2026-03-10 10:15:00` |
-| Explicit even-year stepping within the portable range | `0 0 0 1 1 * 1970-2199/2` | `2026-01-01 00:00:00` | `2025-01-01 00:00:00` |
+| Stepping anchored to the portable lower bound | `0 0 0 1 1 * 1970-2199/2` | `2026-01-01 00:00:00` | `2025-01-01 00:00:00` |
 
 Additional parser checks:
 
