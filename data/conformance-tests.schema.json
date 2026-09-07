@@ -1,0 +1,407 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "./conformance-tests.schema.json",
+  "title": "OCPS Conformance Test Vectors",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "$schema",
+    "schemaVersion",
+    "title",
+    "status",
+    "description",
+    "versions"
+  ],
+  "properties": {
+    "$schema": {
+      "const": "./conformance-tests.schema.json"
+    },
+    "schemaVersion": {
+      "type": "integer",
+      "const": 1
+    },
+    "title": {
+      "type": "string",
+      "minLength": 1
+    },
+    "status": {
+      "type": "string",
+      "minLength": 1
+    },
+    "description": {
+      "type": "string",
+      "minLength": 1
+    },
+    "versions": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "1.0",
+        "1.1",
+        "1.2",
+        "1.3",
+        "1.4"
+      ],
+      "properties": {
+        "1.0": {
+          "$ref": "#/$defs/versionGroup"
+        },
+        "1.1": {
+          "$ref": "#/$defs/versionGroup"
+        },
+        "1.2": {
+          "$ref": "#/$defs/versionGroup"
+        },
+        "1.3": {
+          "$ref": "#/$defs/versionGroup"
+        },
+        "1.4": {
+          "$ref": "#/$defs/versionGroup"
+        }
+      }
+    }
+  },
+  "$defs": {
+    "dateTimeSecond": {
+      "type": "string",
+      "pattern": "^\\d{4}-\\d{2}-\\d{2} \\d{2}:\\d{2}:\\d{2}$"
+    },
+    "dateTimeList": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/dateTimeSecond"
+      }
+    },
+    "parseExpectation": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "result"
+      ],
+      "properties": {
+        "result": {
+          "type": "string",
+          "enum": [
+            "accept",
+            "reject"
+          ]
+        }
+      }
+    },
+    "runtimeExpectation": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "contextType",
+        "whenUnsupported"
+      ],
+      "properties": {
+        "contextType": {
+          "type": "string",
+          "minLength": 1
+        },
+        "whenUnsupported": {
+          "type": "string",
+          "minLength": 1
+        }
+      }
+    },
+    "portabilityExpectation": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "result",
+        "allowedWhenDocumentedRangeIncludesValue"
+      ],
+      "properties": {
+        "result": {
+          "type": "string",
+          "const": "non-portable"
+        },
+        "allowedWhenDocumentedRangeIncludesValue": {
+          "type": "boolean"
+        }
+      }
+    },
+    "baseTest": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "type",
+        "description",
+        "pattern",
+        "expectations"
+      ],
+      "properties": {
+        "id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "type": {
+          "type": "string",
+          "enum": [
+            "datetime-match",
+            "parse-reject",
+            "parse-accept",
+            "equivalence",
+            "runtime-capability",
+            "portability"
+          ]
+        },
+        "description": {
+          "type": "string",
+          "minLength": 1
+        },
+        "pattern": {
+          "type": "string",
+          "minLength": 1
+        },
+        "expectations": {
+          "type": "object"
+        }
+      }
+    },
+    "datetimeMatchTest": {
+      "allOf": [
+        {
+          "$ref": "#/$defs/baseTest"
+        },
+        {
+          "properties": {
+            "type": {
+              "const": "datetime-match"
+            },
+            "expectations": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": [
+                "mustMatch",
+                "mustNotMatch"
+              ],
+              "properties": {
+                "mustMatch": {
+                  "$ref": "#/$defs/dateTimeList"
+                },
+                "mustNotMatch": {
+                  "$ref": "#/$defs/dateTimeList"
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    "parseRejectTest": {
+      "allOf": [
+        {
+          "$ref": "#/$defs/baseTest"
+        },
+        {
+          "properties": {
+            "type": {
+              "const": "parse-reject"
+            },
+            "expectations": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": [
+                "parse"
+              ],
+              "properties": {
+                "parse": {
+                  "allOf": [
+                    {
+                      "$ref": "#/$defs/parseExpectation"
+                    },
+                    {
+                      "properties": {
+                        "result": {
+                          "const": "reject"
+                        }
+                      }
+                    }
+                  ]
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    "parseAcceptTest": {
+      "allOf": [
+        {
+          "$ref": "#/$defs/baseTest"
+        },
+        {
+          "properties": {
+            "type": {
+              "const": "parse-accept"
+            },
+            "expectations": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": [
+                "parse"
+              ],
+              "properties": {
+                "parse": {
+                  "allOf": [
+                    {
+                      "$ref": "#/$defs/parseExpectation"
+                    },
+                    {
+                      "properties": {
+                        "result": {
+                          "const": "accept"
+                        }
+                      }
+                    }
+                  ]
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    "equivalenceTest": {
+      "allOf": [
+        {
+          "$ref": "#/$defs/baseTest"
+        },
+        {
+          "properties": {
+            "type": {
+              "const": "equivalence"
+            },
+            "expectations": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": [
+                "equivalentTo"
+              ],
+              "properties": {
+                "equivalentTo": {
+                  "type": "string",
+                  "minLength": 1
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    "runtimeCapabilityTest": {
+      "allOf": [
+        {
+          "$ref": "#/$defs/baseTest"
+        },
+        {
+          "properties": {
+            "type": {
+              "const": "runtime-capability"
+            },
+            "expectations": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": [
+                "parse",
+                "runtime"
+              ],
+              "properties": {
+                "parse": {
+                  "allOf": [
+                    {
+                      "$ref": "#/$defs/parseExpectation"
+                    },
+                    {
+                      "properties": {
+                        "result": {
+                          "const": "accept"
+                        }
+                      }
+                    }
+                  ]
+                },
+                "runtime": {
+                  "$ref": "#/$defs/runtimeExpectation"
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    "portabilityTest": {
+      "allOf": [
+        {
+          "$ref": "#/$defs/baseTest"
+        },
+        {
+          "properties": {
+            "type": {
+              "const": "portability"
+            },
+            "expectations": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": [
+                "portability"
+              ],
+              "properties": {
+                "portability": {
+                  "$ref": "#/$defs/portabilityExpectation"
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    "test": {
+      "oneOf": [
+        {
+          "$ref": "#/$defs/datetimeMatchTest"
+        },
+        {
+          "$ref": "#/$defs/parseRejectTest"
+        },
+        {
+          "$ref": "#/$defs/parseAcceptTest"
+        },
+        {
+          "$ref": "#/$defs/equivalenceTest"
+        },
+        {
+          "$ref": "#/$defs/runtimeCapabilityTest"
+        },
+        {
+          "$ref": "#/$defs/portabilityTest"
+        }
+      ]
+    },
+    "versionGroup": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "datetimeFormat",
+        "tests"
+      ],
+      "properties": {
+        "datetimeFormat": {
+          "type": "string",
+          "const": "YYYY-MM-DD HH:mm:ss"
+        },
+        "tests": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/$defs/test"
+          }
+        }
+      }
+    }
+  }
+}
