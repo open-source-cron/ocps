@@ -219,15 +219,17 @@
         {
           "id": "ocps-1.1-daily-nickname-midnight-schedule",
           "type": "datetime-match",
-          "description": "The daily nickname runs at midnight each day.",
+          "description": "The daily nickname runs at midnight each day across adjacent days and month boundaries.",
           "pattern": "@daily",
           "expectations": {
             "mustMatch": [
               "2025-10-08 00:00:00",
+              "2025-10-09 00:00:00",
               "2025-11-01 00:00:00"
             ],
             "mustNotMatch": [
               "2025-10-08 00:00:01",
+              "2025-10-08 23:59:59",
               "2025-11-01 00:01:00"
             ]
           }
