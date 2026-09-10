@@ -8,6 +8,8 @@ This document tracks the conformance of various scheduling libraries, daemons, a
 
 An implementation may not support all features of a specific OCPS version. The tables below aim to capture that nuance.
 
+For machine-processable conformance test vectors grouped by version, see [`data/conformance-tests.json`](./data/conformance-tests.json). Its schema is [`data/conformance-tests.schema.json`](./data/conformance-tests.schema.json).
+
 ## 2. Conformance Matrix
 
 **Legend:**

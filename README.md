@@ -52,6 +52,8 @@ Progress for each iteration is tracked through [milestones](https://github.com/o
 
 Each full specification document contains a "Conformance" section detailing the requirements for an implementation to claim compliance with that version.
 
+For machine-processable conformance test vectors grouped by version, see **[`data/conformance-tests.json`](./data/conformance-tests.json)**. Its schema is **[`data/conformance-tests.schema.json`](./data/conformance-tests.schema.json)**.
+
 For a list of known libraries and their current conformance levels, please see the **[Implementation Conformance Matrix](./CONFORMANCE.md)**.
 
 ## Contributing
