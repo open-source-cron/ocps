@@ -144,7 +144,6 @@
             "datetime-match",
             "parse-reject",
             "parse-accept",
-            "equivalence",
             "runtime-capability",
             "portability"
           ]
@@ -266,33 +265,6 @@
         }
       ]
     },
-    "equivalenceTest": {
-      "allOf": [
-        {
-          "$ref": "#/$defs/baseTest"
-        },
-        {
-          "properties": {
-            "type": {
-              "const": "equivalence"
-            },
-            "expectations": {
-              "type": "object",
-              "additionalProperties": false,
-              "required": [
-                "equivalentTo"
-              ],
-              "properties": {
-                "equivalentTo": {
-                  "type": "string",
-                  "minLength": 1
-                }
-              }
-            }
-          }
-        }
-      ]
-    },
     "runtimeCapabilityTest": {
       "allOf": [
         {
@@ -370,9 +342,6 @@
         },
         {
           "$ref": "#/$defs/parseAcceptTest"
-        },
-        {
-          "$ref": "#/$defs/equivalenceTest"
         },
         {
           "$ref": "#/$defs/runtimeCapabilityTest"

@@ -217,12 +217,19 @@
           }
         },
         {
-          "id": "ocps-1.1-daily-nickname-equivalence",
-          "type": "equivalence",
-          "description": "The daily nickname is equivalent to the corresponding 5-field pattern.",
+          "id": "ocps-1.1-daily-nickname-midnight-schedule",
+          "type": "datetime-match",
+          "description": "The daily nickname runs at midnight each day.",
           "pattern": "@daily",
           "expectations": {
-            "equivalentTo": "0 0 * * *"
+            "mustMatch": [
+              "2025-10-08 00:00:00",
+              "2025-11-01 00:00:00"
+            ],
+            "mustNotMatch": [
+              "2025-10-08 00:00:01",
+              "2025-11-01 00:01:00"
+            ]
           }
         },
         {
