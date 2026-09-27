@@ -17,7 +17,8 @@
       "items": [
         { "name": "cronie", "compliance": { "1.0": "full", "1.1": "full", "1.2": "full", "1.3": "none", "1.4": "none" }, "notes": "A fork of Vixie-cron. Supports nicknames and seconds.", "references": [3, 4] },
         { "name": "vixie-cron / isc-cron", "compliance": { "1.0": "full", "1.1": "full", "1.2": "none", "1.3": "none", "1.4": "none" }, "notes": "The de facto standard for system cron.", "references": [1, 2, 5] },
-        { "name": "dcron", "compliance": { "1.0": "full", "1.1": "full", "1.2": "none", "1.3": "none", "1.4": "none" }, "notes": "A simple and lightweight implementation that supports nicknames.", "references": [6] }
+        { "name": "dcron", "compliance": { "1.0": "full", "1.1": "full", "1.2": "none", "1.3": "none", "1.4": "none" }, "notes": "A simple and lightweight implementation that supports nicknames.", "references": [6] },
+        { "name": "Power Manager", "compliance": { "1.0": "full", "1.1": "full", "1.2": "full", "1.3": "none", "1.4": "full" }, "notes": "Commercial automation and scheduling tool that includes a cron trigger.", "references": [23] }
       ]
     },
     {
@@ -99,6 +100,7 @@
     { "id": 19, "url": "https://www.npmjs.com/package/croner" },
     { "id": 20, "url": "https://www.npmjs.com/package/cron" },
     { "id": 21, "url": "https://npm-compare.com/cron,node-cron,node-schedule" },
-    { "id": 22, "url": "https://www.npmjs.com/package/cron-parser" }
+    { "id": 22, "url": "https://www.npmjs.com/package/cron-parser" },
+    { "id": 23, "url": "https://dssw.co.uk/powermanager/" }
   ]
 }
