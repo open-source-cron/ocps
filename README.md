@@ -1,6 +1,6 @@
 # OCPS: The Open Cron Pattern Specification
 
-**📘 [Read the OCPS 1.0 Specification](./specifications/OCPS-1.0.md)** — The official 1.0 release is now available!
+**📘 [Read the OCPS 1.1 Specification](./specifications/OCPS-1.1.md)** — The official 1.1 release is now available! ([OCPS 1.0](./specifications/OCPS-1.0.md) remains published.)
 
 ---
 
@@ -40,13 +40,13 @@ This repository is structured to provide two views of the specification:
 
 Progress for each iteration is tracked through [milestones](https://github.com/open-source-cron/ocps/milestones).
 
-| Version | Status | Title | Incremental Change | Full Specification |
-| :--- | :---: | :--- | :--- | :--- |
-| **1.4** | DRAFT | Logical & Implementation Semantics | [1.4 Increment](./increments/OCPS-increment-1.4.md) | N/A |
-| **1.3** | DRAFT | Advanced Calendar Scheduling | [1.3 Increment](./increments/OCPS-increment-1.3.md) | N/A |
-| **1.2** | DRAFT | Second and Year-Level Precision | [1.2 Increment](./increments/OCPS-increment-1.2.md) | N/A |
-| **1.1** | DRAFT | Predefined Schedules | [1.1 Increment](./increments/OCPS-increment-1.1.md) | N/A |
-| **1.0** | **FINAL** | The Baseline | N/A | **[OCPS 1.0](./specifications/OCPS-1.0.md)** |
+| Version | Status | Revision | Title | Incremental Change | Full Specification |
+| :--- | :---: | :---: | :--- | :--- | :--- |
+| **1.4** | DRAFT | N/A | Logical & Implementation Semantics | [1.4 Increment](./increments/OCPS-increment-1.4.md) | N/A |
+| **1.3** | DRAFT | N/A | Advanced Calendar Scheduling | [1.3 Increment](./increments/OCPS-increment-1.3.md) | N/A |
+| **1.2** | DRAFT | N/A | Second and Year-Level Precision | [1.2 Increment](./increments/OCPS-increment-1.2.md) | N/A |
+| **1.1** | **FINAL** | 1 | Predefined Schedules | [1.1 Increment](./increments/OCPS-increment-1.1.md) | **[OCPS 1.1](./specifications/OCPS-1.1.md)** |
+| **1.0** | **FINAL** | 3 | The Baseline | N/A | **[OCPS 1.0](./specifications/OCPS-1.0.md)** |
 
 ## Conformance & Implementations
 
@@ -69,6 +69,19 @@ The **finalization of the next iteration** of the specification is handled as a 
 Discussions on **future iterations, new feature requests, or proposed problems/improvements** are handled as separate issues and should be tagged appropriately (e.g., `feature-request`, `discussion`, `problem`, `enhancement`). When proposing changes to future iterations, it is **highly encouraged to open a pull request** with your proposed changes to facilitate discussion and review.
 
 Changes to this **README** should always be submitted as a pull request.
+
+### Revisions and Errata
+
+Finalized specifications are immutable except for numbered Revisions, which only clarify and never change behavior (every version remains a strict superset of the previous one). Multiple finalized versions are published side by side in `/specifications`.
+
+When a clarification changes a rule that appears in more than one full specification (e.g. a 1.0 rule repeated in 1.1):
+
+  * Apply the same change to every later full specification in the same pull request.
+  * Add a Revision row to each affected specification's revision history. A later specification's history states which earlier revision it includes (e.g. "Includes OCPS 1.0 revision 3").
+  * Update the matching vectors in `data/conformance-tests.json` and regenerate `CONFORMANCE.md` if needed.
+  * Update the Revision column in the table above.
+
+Shared sections keep identical headings across specifications, so divergence can be checked with a `diff` of the shared sections. Releases are tagged on `main` (e.g. `ocps-1.0-r3`, `ocps-1.1-r1`); long-lived per-version branches are not used.
 
 ### Updating the Conformance Matrix
 

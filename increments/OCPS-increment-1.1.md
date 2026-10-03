@@ -1,7 +1,8 @@
 # OCPS 1.1: Predefined Schedules
 
-**Status: DRAFT**
-**Date: 2025-07-03**
+**Status:** FINAL  
+**Revision:** 1  
+**Date:** 2026-10-03
 
 ## 1. Introduction
 
@@ -29,7 +30,7 @@ An implementation is "OCPS 1.1 Compliant" if it meets all OCPS 1.0 requirements 
 
 ### 4.1. Predefined Schedules ("Nicknames")
 
-OCPS 1.1 adds support for nicknames as aliases for common patterns. Nicknames MUST be treated as case-sensitive. An implementation MUST recognize the following strings, which MUST NOT be combined with a 5-field expression:
+OCPS 1.1 adds support for nicknames as aliases for common patterns. Nicknames MUST be treated as case-sensitive. An implementation MUST recognize the following strings, which MUST NOT be combined with a 5-field expression or any other token. Leading and trailing whitespace around a nickname MUST be ignored, as in OCPS 1.0 Section 4.1. The equivalent patterns are normative:
 
 | Nickname | Equivalent 5-Field Pattern | Description |
 | :--- | :--- | :--- |
@@ -44,5 +45,14 @@ OCPS 1.1 adds support for nicknames as aliases for common patterns. Nicknames MU
 
 The `@reboot` nickname is a special case, as it is not time-based but event-based.
 
+  * `@reboot` has no 5-field equivalent, so OCPS 1.0 Sections 6.1 and 6.2 do not apply to it.
   * An OCPS 1.1 compliant parser **MUST** recognize `@reboot` as a valid pattern.
   * If an implementation's execution environment does not support a "startup" or "reboot" event (for example, a browser or a serverless environment), the implementation **MAY** reject the pattern at runtime. If rejected, it **SHOULD** provide a clear error message stating that `@reboot` is unsupported in the current context. It **MUST NOT** be treated as a syntax error during parsing.
+
+-----
+
+## Appendix A: Revision History
+
+| Revision | Date | Author(s) | Description of Changes |
+| :--- | :--- | :--- | :--- |
+| 1 | 2026-10-03 | The OCPS Authors | Finalized. Full specification published as [OCPS 1.1](../specifications/OCPS-1.1.md). Clarified whitespace handling, normative equivalents, and `@reboot` interaction with 1.0 Sections 6.1/6.2. |

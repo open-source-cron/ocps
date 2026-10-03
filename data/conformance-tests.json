@@ -270,6 +270,45 @@
               "whenUnsupported": "reject-with-clear-error"
             }
           }
+        },
+        {
+          "id": "ocps-1.1-annually-nickname",
+          "type": "datetime-match",
+          "description": "The annually nickname is an alias of yearly.",
+          "pattern": "@annually",
+          "expectations": {
+            "mustMatch": [
+              "2026-01-01 00:00:00"
+            ],
+            "mustNotMatch": [
+              "2026-01-02 00:00:00"
+            ]
+          }
+        },
+        {
+          "id": "ocps-1.1-midnight-nickname",
+          "type": "datetime-match",
+          "description": "The midnight nickname is an alias of daily.",
+          "pattern": "@midnight",
+          "expectations": {
+            "mustMatch": [
+              "2026-03-10 00:00:00"
+            ],
+            "mustNotMatch": [
+              "2026-03-10 00:01:00"
+            ]
+          }
+        },
+        {
+          "id": "ocps-1.1-reboot-cannot-be-combined-with-field-expression",
+          "type": "parse-reject",
+          "description": "The reboot nickname cannot be combined with field expressions.",
+          "pattern": "@reboot 0 0 * * *",
+          "expectations": {
+            "parse": {
+              "result": "reject"
+            }
+          }
         }
       ]
     },
