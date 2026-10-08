@@ -165,5 +165,4 @@ The `@reboot` nickname is a special case, as it is not time-based but event-base
 
 | Revision | Date | Author(s) | Description of Changes |
 | :--- | :--- | :--- | :--- |
-| 1 | 2026-10-03 | The OCPS Authors | Initial publication of the 1.1 specification. Includes OCPS 1.0 revision 3. Adds predefined schedules (nicknames). |
-| 2 | 2026-10-08 | The OCPS Authors | Clarifies that five-field character restrictions do not apply to nicknames; adds nickname whitespace conformance coverage; corrects the version identifier. |
+| 1 | 2026-10-03 | The OCPS Authors | Initial publication of the 1.1 specification. Includes OCPS 1.0 revision 3. Adds predefined schedules (nicknames); clarifies five-field character restrictions and nickname whitespace handling. |
