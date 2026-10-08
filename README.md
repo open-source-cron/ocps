@@ -45,7 +45,7 @@ Progress for each iteration is tracked through [milestones](https://github.com/o
 | **1.4** | DRAFT | N/A | Logical & Implementation Semantics | [1.4 Increment](./increments/OCPS-increment-1.4.md) | N/A |
 | **1.3** | DRAFT | N/A | Advanced Calendar Scheduling | [1.3 Increment](./increments/OCPS-increment-1.3.md) | N/A |
 | **1.2** | DRAFT | N/A | Second and Year-Level Precision | [1.2 Increment](./increments/OCPS-increment-1.2.md) | N/A |
-| **1.1** | **FINAL** | 1 | Predefined Schedules | [1.1 Increment](./increments/OCPS-increment-1.1.md) | **[OCPS 1.1](./specifications/OCPS-1.1.md)** |
+| **1.1** | **FINAL** | 2 | Predefined Schedules | [1.1 Increment](./increments/OCPS-increment-1.1.md) | **[OCPS 1.1](./specifications/OCPS-1.1.md)** |
 | **1.0** | **FINAL** | 3 | The Baseline | N/A | **[OCPS 1.0](./specifications/OCPS-1.0.md)** |
 
 ## Conformance & Implementations

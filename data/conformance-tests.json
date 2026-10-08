@@ -246,6 +246,17 @@
           }
         },
         {
+          "id": "ocps-1.1-nickname-surrounding-whitespace-is-ignored",
+          "type": "parse-accept",
+          "description": "Leading and trailing whitespace around nicknames is ignored.",
+          "pattern": "  @daily  ",
+          "expectations": {
+            "parse": {
+              "result": "accept"
+            }
+          }
+        },
+        {
           "id": "ocps-1.1-nickname-cannot-be-combined-with-field-expression",
           "type": "parse-reject",
           "description": "Nicknames cannot be combined with field expressions.",

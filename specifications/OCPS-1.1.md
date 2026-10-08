@@ -6,7 +6,7 @@
 
 ## 1. Introduction
 
-This document defines version 1.0 of the Open Cron Pattern Specification (OCPS). It is a backward-compatible superset of [OCPS 1.0](./OCPS-1.0.md) that adds predefined schedules ("nicknames") such as `@daily`. Its primary goal is to standardize this long-standing de facto Vixie / ISC cron feature.
+This document defines version 1.1 of the Open Cron Pattern Specification (OCPS). It is a backward-compatible superset of [OCPS 1.0](./OCPS-1.0.md) that adds predefined schedules ("nicknames") such as `@daily`. Its primary goal is to standardize this long-standing de facto Vixie / ISC cron feature.
 
 ---
 ## 2. Design Rationale
@@ -22,7 +22,7 @@ An implementation is considered "OCPS 1.1 Compliant" if it meets all OCPS 1.0 re
 
 ### 4.1. Structure
 An OCPS 1.1 pattern MUST be either a nickname as defined in Section 7 or consist of five fields separated by whitespace. A compliant parser MUST adhere to the following rules:
-* It MUST reject a pattern containing any characters not explicitly allowed by Section 4.3 by raising a clear parsing error.
+* A five-field pattern MUST be rejected if it contains any characters not explicitly allowed by Section 4.3, by raising a clear parsing error.
 * Any leading or trailing whitespace from the entire string MUST be ignored.
 * One or more consecutive whitespace characters MUST be treated as a single delimiter.
 
@@ -72,7 +72,7 @@ An OCPS 1.1 pattern MUST be either a nickname as defined in Section 7 or consist
 
 ### 4.3. Character Set
 
-After converting any textual representations (e.g., `JAN`, `SUN`) to their numeric equivalents, a pattern MUST only contain characters from the following set:
+After converting any textual representations (e.g., `JAN`, `SUN`) to their numeric equivalents, a five-field pattern MUST only contain characters from the following set:
 
 * **Whitespace:** Space (`U+0020`) or horizontal tab (`U+0009`).
 * **Digits:** `0123456789`
@@ -166,3 +166,4 @@ The `@reboot` nickname is a special case, as it is not time-based but event-base
 | Revision | Date | Author(s) | Description of Changes |
 | :--- | :--- | :--- | :--- |
 | 1 | 2026-10-03 | The OCPS Authors | Initial publication of the 1.1 specification. Includes OCPS 1.0 revision 3. Adds predefined schedules (nicknames). |
+| 2 | 2026-10-08 | The OCPS Authors | Clarifies that five-field character restrictions do not apply to nicknames; adds nickname whitespace conformance coverage; corrects the version identifier. |
