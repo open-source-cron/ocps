@@ -2,7 +2,7 @@
 
 **Status:** FINAL  
 **Revision:** 1  
-**Date:** 2026-10-03
+**Date:** 2026-11-26
 
 ## 1. Introduction
 
@@ -17,6 +17,7 @@ OCPS 1.1 retains the OCPS 1.0 design: a stable foundation codifying the Vixie/IS
 ## 3. Conformance
 
 An implementation is considered "OCPS 1.1 Compliant" if it meets all OCPS 1.0 requirements and correctly implements the predefined schedules defined in Section 7. Any pattern valid in OCPS 1.1 MUST remain valid and produce an identical schedule in all future versions of the specification.
+
 ---
 ## 4. Pattern Format
 
@@ -165,4 +166,4 @@ The `@reboot` nickname is a special case, as it is not time-based but event-base
 
 | Revision | Date | Author(s) | Description of Changes |
 | :--- | :--- | :--- | :--- |
-| 1 | 2026-10-03 | The OCPS Authors | Initial publication of the 1.1 specification. Includes OCPS 1.0 revision 3. Adds predefined schedules (nicknames); clarifies five-field character restrictions and nickname whitespace handling. |
+| 1 | 2026-11-26 | The OCPS Authors | Initial publication of the 1.1 specification. Includes OCPS 1.0 revision 3. Adds predefined schedules (nicknames); clarifies five-field character restrictions and nickname whitespace handling. |

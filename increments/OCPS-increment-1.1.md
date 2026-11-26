@@ -2,7 +2,7 @@
 
 **Status:** FINAL  
 **Revision:** 1  
-**Date:** 2026-10-03
+**Date:** 2026-11-26
 
 ## 1. Introduction
 
@@ -23,6 +23,8 @@ Predefined schedules have been a feature of Vixie cron and its derivatives for m
 ## 3. Conformance
 
 An implementation is "OCPS 1.1 Compliant" if it meets all OCPS 1.0 requirements and correctly implements the predefined schedules defined herein.
+
+The five-field structure and character-set requirements of OCPS 1.0 Sections 4.1 and 4.3 apply only to five-field patterns. A pattern MUST be either a nickname defined in Section 4.1 of this document or a five-field pattern; a nickname MUST NOT be rejected for containing `@` or letters.
 
 -----
 
@@ -55,4 +57,4 @@ The `@reboot` nickname is a special case, as it is not time-based but event-base
 
 | Revision | Date | Author(s) | Description of Changes |
 | :--- | :--- | :--- | :--- |
-| 1 | 2026-10-03 | The OCPS Authors | Finalized. Full specification published as [OCPS 1.1](../specifications/OCPS-1.1.md). Clarified whitespace handling, normative equivalents, and `@reboot` interaction with 1.0 Sections 6.1/6.2. |
+| 1 | 2026-11-26 | The OCPS Authors | Finalized. Full specification published as [OCPS 1.1](../specifications/OCPS-1.1.md). Clarified five-field character restrictions, whitespace handling, normative equivalents, and `@reboot` interaction with 1.0 Sections 6.1/6.2. |

@@ -72,7 +72,7 @@ Changes to this **README** should always be submitted as a pull request.
 
 ### Revisions and Errata
 
-Finalized specifications are immutable except for numbered Revisions, which only clarify and never change behavior (every version remains a strict superset of the previous one). Multiple finalized versions are published side by side in `/specifications`.
+Finalized specifications are immutable except for numbered Revisions, which only clarify ambiguous or underspecified behavior and never remove or reinterpret well-defined behavior (every version remains a strict superset of the previous one). Multiple finalized versions are published side by side in `/specifications`.
 
 When a clarification changes a rule that appears in more than one full specification (e.g. a 1.0 rule repeated in 1.1):
 
@@ -81,7 +81,7 @@ When a clarification changes a rule that appears in more than one full specifica
   * Update the matching vectors in `data/conformance-tests.json` and regenerate `CONFORMANCE.md` if needed.
   * Update the Revision column in the table above.
 
-Shared sections keep identical headings across specifications, so divergence can be checked with a `diff` of the shared sections. Releases are tagged on `main` (e.g. `ocps-1.0-r3`, `ocps-1.1-r1`); long-lived per-version branches are not used.
+Shared sections keep identical headings across specifications, so divergence can be checked with a `diff` of the shared sections. Releases are tagged on `main` using the existing scheme: `X.Y` for the initial publication and `X.Y-rN` for later revisions (e.g. `1.0`, `1.0-r3`, `1.1`); long-lived per-version branches are not used.
 
 ### Updating the Conformance Matrix
 
