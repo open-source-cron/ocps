@@ -32,9 +32,9 @@ The core principles behind OCPS are **Incremental Introduction** and **Backward 
 
 This repository is structured to provide two views of the specification:
 
-  * **/increments**: Documents describing only the *new features* introduced in each version. These are useful for quickly seeing what has changed. Works in progress for future versions are also located here.
+  * **/increments**: Documents describing only the *new features* proposed for each draft version. These are useful for quickly seeing what will change. Once a version is finalized, its increment is removed and its content lives in the full specification.
 
-  * **/specifications**: The *full, consolidated* specification for each version. These documents are the canonical reference for implementers. A new specification file is only published here once its corresponding increment has been finalized.
+  * **/specifications**: The *full, consolidated* specification for each version. These documents are the canonical reference for implementers. A new specification file is published here when its corresponding increment is finalized, replacing that increment.
 
 ## Versions and Specifications
 
@@ -45,7 +45,7 @@ Progress for each iteration is tracked through [milestones](https://github.com/o
 | **1.4** | DRAFT | N/A | Logical & Implementation Semantics | [1.4 Increment](./increments/OCPS-increment-1.4.md) | N/A |
 | **1.3** | DRAFT | N/A | Advanced Calendar Scheduling | [1.3 Increment](./increments/OCPS-increment-1.3.md) | N/A |
 | **1.2** | DRAFT | N/A | Second and Year-Level Precision | [1.2 Increment](./increments/OCPS-increment-1.2.md) | N/A |
-| **1.1** | **FINAL** | 1 | Predefined Schedules | [1.1 Increment](./increments/OCPS-increment-1.1.md) | **[OCPS 1.1](./specifications/OCPS-1.1.md)** |
+| **1.1** | **FINAL** | 1 | Predefined Schedules | N/A | **[OCPS 1.1](./specifications/OCPS-1.1.md)** |
 | **1.0** | **FINAL** | 3 | The Baseline | N/A | **[OCPS 1.0](./specifications/OCPS-1.0.md)** |
 
 ## Conformance & Implementations
@@ -72,7 +72,7 @@ Changes to this **README** should always be submitted as a pull request.
 
 ### Revisions and Errata
 
-Finalized specifications are immutable except for numbered Revisions, which only clarify and never change behavior (every version remains a strict superset of the previous one). Multiple finalized versions are published side by side in `/specifications`.
+Finalized specifications are immutable except for numbered Revisions, which only clarify ambiguous or underspecified behavior and never remove or reinterpret well-defined behavior (every version remains a strict superset of the previous one). Multiple finalized versions are published side by side in `/specifications`.
 
 When a clarification changes a rule that appears in more than one full specification (e.g. a 1.0 rule repeated in 1.1):
 
@@ -81,7 +81,7 @@ When a clarification changes a rule that appears in more than one full specifica
   * Update the matching vectors in `data/conformance-tests.json` and regenerate `CONFORMANCE.md` if needed.
   * Update the Revision column in the table above.
 
-Shared sections keep identical headings across specifications, so divergence can be checked with a `diff` of the shared sections. Releases are tagged on `main` (e.g. `ocps-1.0-r3`, `ocps-1.1-r1`); long-lived per-version branches are not used.
+Shared sections keep identical headings across specifications, so divergence can be checked with a `diff` of the shared sections. Releases are tagged on `main` using the existing scheme: `X.Y` for the initial publication and `X.Y-rN` for later revisions (e.g. `1.0`, `1.0-r3`, `1.1`); long-lived per-version branches are not used.
 
 ### Updating the Conformance Matrix
 
