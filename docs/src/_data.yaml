@@ -1,0 +1,12 @@
+top_links:
+  - title: Specifications
+    url: /specifications/
+  - title: Conformance
+    url: /conformance/
+  - title: GitHub
+    url: https://github.com/open-source-cron/ocps
+nav_links:
+  - title: Milestones
+    url: https://github.com/open-source-cron/ocps/milestones
+  - title: Issues
+    url: https://github.com/open-source-cron/ocps/issues
