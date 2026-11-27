@@ -1,6 +1,6 @@
 # OCPS: The Open Cron Pattern Specification
 
-**📘 [Read the OCPS 1.1 Specification](./specifications/OCPS-1.1.md)** — The official 1.1 release is now available! ([OCPS 1.0](./specifications/OCPS-1.0.md) remains published.)
+**📘 [Read the OCPS 1.1 Specification](./specifications/OCPS-1.1.md)** — The official 1.1 release is now available! ([OCPS 1.0](./specifications/OCPS-1.0.md) remains published.) Also available at **[ocps.56k.guru](https://ocps.56k.guru)**.
 
 ---
 
@@ -35,6 +35,8 @@ This repository is structured to provide two views of the specification:
   * **/increments**: Documents describing only the *new features* proposed for each draft version. These are useful for quickly seeing what will change. Once a version is finalized, its increment is removed and its content lives in the full specification.
 
   * **/specifications**: The *full, consolidated* specification for each version. These documents are the canonical reference for implementers. A new specification file is published here when its corresponding increment is finalized, replacing that increment.
+
+  * **/docs**: The documentation site at [ocps.56k.guru](https://ocps.56k.guru), built with [ombryt](https://github.com/Hexagon/ombryt) from the markdown above (`docs/prepare.sh && ombryt -C docs serve`) and published to GitHub Pages on every push to `main`.
 
 ## Versions and Specifications
 

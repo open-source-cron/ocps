@@ -1,0 +1,15 @@
+# The OCPS documentation site at https://ocps.56k.guru, built with ombryt (https://github.com/Hexagon/ombryt)
+# on its built-in docs theme. The pages are generated from the repository's markdown by prepare.sh;
+# see .github/workflows/docs.yml.
+
+[site]
+url = "https://ocps.56k.guru"
+title = "OCPS"
+description = "The Open Cron Pattern Specification: a well-defined, backward-compatible superset of the Vixie cron format."
+language = "en"
+
+[build]
+src = "src"
+out = "_site"
+theme = "docs"
+strict_links = true
